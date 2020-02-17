@@ -366,10 +366,10 @@ if "win32" in sys.platform:
         "ws2_32",
     )
 if BUILD_WITH_SYSTEM_OPENSSL:
-    EXTENSION_LIBRARIES += (
-        "ssl",
-        "crypto",
-    )
+    if not "win32" in sys.platform:
+        EXTENSION_LIBRARIES += ('ssl', 'crypto',)
+    else:
+        EXTENSION_LIBRARIES += ('libssl', 'libcrypto',)
 if BUILD_WITH_SYSTEM_ZLIB:
     EXTENSION_LIBRARIES += ("z",)
 if BUILD_WITH_SYSTEM_CARES:
