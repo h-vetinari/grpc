@@ -252,6 +252,8 @@ class BuildExt(build_ext.build_ext):
             """Test if default compiler is okay with specifying c++ version
             when invoked in C mode. GCC is okay with this, while clang is not.
             """
+            if sys.platform == "win32":
+                return False
             try:
                 # TODO(lidiz) Remove the generated a.out for success tests.
                 cc = os.environ.get("CC", "cc")
