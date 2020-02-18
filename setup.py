@@ -214,6 +214,9 @@ ENABLE_DOCUMENTATION_BUILD = _env_bool_value(
 
 
 def check_linker_need_libatomic():
+    if sys.platform == 'win32':
+        return False
+
     """Test if linker on system needs libatomic."""
     code_test = (
         b"#include <atomic>\n"
@@ -268,10 +271,6 @@ if EXTRA_ENV_COMPILE_ARGS is None:
                 EXTRA_ENV_COMPILE_ARGS += (
                     " -D_ftime=_ftime64 -D_timeb=__timeb64"
                 )
-        else:
-            # We need to statically link the C++ Runtime, only the C runtime is
-            # available dynamically
-            EXTRA_ENV_COMPILE_ARGS += " /MT"
     elif "linux" in sys.platform:
         EXTRA_ENV_COMPILE_ARGS += (
             " -fvisibility=hidden -fno-wrapv -fno-exceptions"
