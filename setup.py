@@ -24,7 +24,6 @@ from distutils.unixccompiler import UnixCCompiler
 UnixCCompiler.src_extensions.append('.S')
 del UnixCCompiler
 
-from distutils import cygwinccompiler
 from distutils import extension as _extension
 from distutils import util
 import os
@@ -202,6 +201,9 @@ ENABLE_DOCUMENTATION_BUILD = _env_bool_value(
 
 
 def check_linker_need_libatomic():
+    if sys.platform == 'win32':
+        return False
+
     """Test if linker on system needs libatomic."""
     code_test = (b'#include <atomic>\n' +
                  b'int main() { return std::atomic<int64_t>{}; }')
@@ -246,10 +248,6 @@ if EXTRA_ENV_COMPILE_ARGS is None:
                 EXTRA_ENV_COMPILE_ARGS += ' -D_ftime=_ftime32 -D_timeb=__timeb32 -D_ftime_s=_ftime32_s'
             else:
                 EXTRA_ENV_COMPILE_ARGS += ' -D_ftime=_ftime64 -D_timeb=__timeb64'
-        else:
-            # We need to statically link the C++ Runtime, only the C runtime is
-            # available dynamically
-            EXTRA_ENV_COMPILE_ARGS += ' /MT'
     elif "linux" in sys.platform:
         EXTRA_ENV_COMPILE_ARGS += ' -fvisibility=hidden -fno-wrapv -fno-exceptions'
     elif "darwin" in sys.platform:
@@ -262,6 +260,7 @@ if EXTRA_ENV_LINK_ARGS is None:
         if check_linker_need_libatomic():
             EXTRA_ENV_LINK_ARGS += ' -latomic'
     elif "win32" in sys.platform and sys.version_info < (3, 5):
+        from distutils import cygwinccompiler
         msvcr = cygwinccompiler.get_msvcr()[0]
         EXTRA_ENV_LINK_ARGS += (
             ' -static-libgcc -static-libstdc++ -mcrtdll={msvcr}'
