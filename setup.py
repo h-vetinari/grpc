@@ -209,6 +209,9 @@ ENABLE_DOCUMENTATION_BUILD = _env_bool_value(
 
 
 def check_linker_need_libatomic():
+    if sys.platform == 'win32':
+        return False
+
     """Test if linker on system needs libatomic."""
     code_test = (
         b"#include <atomic>\n"
@@ -266,9 +269,6 @@ if EXTRA_ENV_COMPILE_ARGS is None:
         # MSVC by defaults uses C++14 and C89 so both needs to be configured.
         EXTRA_ENV_COMPILE_ARGS += " /std:c++17"
         EXTRA_ENV_COMPILE_ARGS += " /std:c11"
-        # We need to statically link the C++ Runtime, only the C runtime is
-        # available dynamically
-        EXTRA_ENV_COMPILE_ARGS += " /MT"
     elif "linux" in sys.platform:
         # GCC by defaults uses C17 so only C++17 needs to be specified.
         EXTRA_ENV_COMPILE_ARGS += " -std=c++17"
