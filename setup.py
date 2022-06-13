@@ -179,6 +179,8 @@ BUILD_WITH_STATIC_LIBSTDCXX = _env_bool_value(
     "GRPC_PYTHON_BUILD_WITH_STATIC_LIBSTDCXX", "False"
 )
 
+BUILD_WITH_SYSTEM_GRPC_CORE = _env_bool_value('GRPC_PYTHON_BUILD_SYSTEM_GRPC_CORE', 'False')
+
 # For local development use only: This skips building gRPC Core and its
 # dependencies, including protobuf and boringssl. This allows "incremental"
 # compilation by first building gRPC Core using make, then building only the
@@ -379,6 +381,12 @@ if BUILD_WITH_SYSTEM_ABSL:
     EXTENSION_LIBRARIES += tuple(
         lib.stem[3:] for lib in pathlib.Path("/usr").glob("lib*/libabsl_*.so")
     )
+if BUILD_WITH_SYSTEM_GRPC_CORE:
+    EXTENSION_LIBRARIES += ('gpr', 'grpc', )
+    if "win32" in sys.platform:
+        EXTENSION_LIBRARIES += ('libprotoc', 'libprotobuf', 'libprotobuf-lite', 'address_sorting',)
+        EXTENSION_LIBRARIES += tuple(f'upb_{x}_lib' for x in ["base", "json", "mem", "message", "textformat"])
+        EXTENSION_LIBRARIES += tuple(lib.stem for lib in pathlib.Path(os.environ['LIBRARY_LIB']).glob('absl_*.lib'))
 
 DEFINE_MACROS = (("_WIN32_WINNT", 0x600),)
 asm_files = []
@@ -504,6 +512,9 @@ def cython_extensions_and_necessity():
             prefix + "libgrpc.a",
         ]
         core_c_files = []
+    elif BUILD_WITH_SYSTEM_GRPC_CORE:
+        core_c_files = []
+        extra_objects = []
     else:
         core_c_files = list(CORE_C_FILES)
         extra_objects = []
