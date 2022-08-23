@@ -3065,33 +3065,38 @@ target_include_directories(grpc
     ${_gRPC_ZLIB_INCLUDE_DIR}
 )
 target_link_libraries(grpc
-  ${_gRPC_ALLTARGETS_LIBRARIES}
-  upb_json_lib
-  upb_textformat_lib
-  ${_gRPC_RE2_LIBRARIES}
-  ${_gRPC_ZLIB_LIBRARIES}
-  absl::algorithm_container
-  absl::config
-  absl::no_destructor
-  absl::flat_hash_map
-  absl::flat_hash_set
-  absl::inlined_vector
-  absl::bind_front
-  absl::function_ref
-  absl::hash
-  absl::type_traits
-  absl::random_bit_gen_ref
-  absl::random_distributions
-  absl::statusor
-  absl::span
-  absl::utility
-  ${_gRPC_CARES_LIBRARIES}
-  gpr
-  ${_gRPC_SSL_LIBRARIES}
-  ${_gRPC_ADDRESS_SORTING_LIBRARIES}
+  # core libs
+  PRIVATE ${_gRPC_ALLTARGETS_LIBRARIES}
+  # vendored libs
+  PRIVATE ${_gRPC_ADDRESS_SORTING_LIBRARIES}
+  PRIVATE upb_json_lib
+  PRIVATE upb_textformat_lib
+  # external dependencies used within grpc
+  PRIVATE ${_gRPC_CARES_LIBRARIES}
+  PRIVATE ${_gRPC_RE2_LIBRARIES}
+  PRIVATE ${_gRPC_ZLIB_LIBRARIES}
+  # external dependencies that need to available at runtime
+  PUBLIC  ${_gRPC_SSL_LIBRARIES}
+  PRIVATE absl::algorithm_container
+  PRIVATE absl::config
+  PRIVATE absl::no_destructor
+  PRIVATE absl::flat_hash_map
+  PRIVATE absl::flat_hash_set
+  PRIVATE absl::inlined_vector
+  PRIVATE absl::bind_front
+  PRIVATE absl::function_ref
+  PRIVATE absl::hash
+  PRIVATE absl::type_traits
+  PRIVATE absl::random_bit_gen_ref
+  PRIVATE absl::random_distributions
+  PRIVATE absl::statusor
+  PRIVATE absl::span
+  PRIVATE absl::utility
+  # targets which belong to grpc anyway
+  PUBLIC  gpr
 )
 if(_gRPC_PLATFORM_IOS OR _gRPC_PLATFORM_MAC)
-  target_link_libraries(grpc "-framework CoreFoundation")
+  target_link_libraries(grpc PUBLIC "-framework CoreFoundation")
 endif()
 
 foreach(_hdr
@@ -3730,31 +3735,36 @@ target_include_directories(grpc_unsecure
     ${_gRPC_ZLIB_INCLUDE_DIR}
 )
 target_link_libraries(grpc_unsecure
-  ${_gRPC_ALLTARGETS_LIBRARIES}
-  upb_mini_descriptor_lib
-  upb_wire_lib
-  ${_gRPC_ZLIB_LIBRARIES}
-  absl::algorithm_container
-  absl::config
-  absl::no_destructor
-  absl::flat_hash_map
-  absl::flat_hash_set
-  absl::inlined_vector
-  absl::bind_front
-  absl::function_ref
-  absl::hash
-  absl::type_traits
-  absl::random_bit_gen_ref
-  absl::random_distributions
-  absl::statusor
-  absl::span
-  absl::utility
-  ${_gRPC_CARES_LIBRARIES}
-  gpr
-  ${_gRPC_ADDRESS_SORTING_LIBRARIES}
+  # core libs
+  PRIVATE ${_gRPC_ALLTARGETS_LIBRARIES}
+  # vendored libs
+  PRIVATE ${_gRPC_ADDRESS_SORTING_LIBRARIES}
+  PRIVATE upb_mini_descriptor_lib
+  PRIVATE upb_wire_lib
+  # external dependencies used within grpc
+  PRIVATE ${_gRPC_ZLIB_LIBRARIES}
+  PRIVATE ${_gRPC_CARES_LIBRARIES}
+  # external dependencies that need to available at runtime
+  PRIVATE absl::algorithm_container
+  PRIVATE absl::config
+  PRIVATE absl::no_destructor
+  PRIVATE absl::flat_hash_map
+  PRIVATE absl::flat_hash_set
+  PRIVATE absl::inlined_vector
+  PRIVATE absl::bind_front
+  PRIVATE absl::function_ref
+  PRIVATE absl::hash
+  PRIVATE absl::type_traits
+  PRIVATE absl::random_bit_gen_ref
+  PRIVATE absl::random_distributions
+  PRIVATE absl::statusor
+  PRIVATE absl::span
+  PRIVATE absl::utility
+  # targets which belong to grpc anyway
+  PUBLIC  gpr
 )
 if(_gRPC_PLATFORM_IOS OR _gRPC_PLATFORM_MAC)
-  target_link_libraries(grpc_unsecure "-framework CoreFoundation")
+  target_link_libraries(grpc_unsecure PUBLIC "-framework CoreFoundation")
 endif()
 
 foreach(_hdr
