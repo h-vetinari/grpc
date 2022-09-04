@@ -383,14 +383,21 @@ if BUILD_WITH_SYSTEM_CARES:
 if BUILD_WITH_SYSTEM_RE2:
     EXTENSION_LIBRARIES += ("re2",)
 if BUILD_WITH_SYSTEM_ABSL:
-    EXTENSION_LIBRARIES += tuple(
-        lib.stem[3:] for lib in pathlib.Path("/usr").glob("lib*/libabsl_*.so")
-    )
+    if "win32" in sys.platform:
+        absl_libs = (
+            'abseil_dll', 'absl_flags', 'absl_flags_commandlineflag', 'absl_flags_commandlineflag_internal',
+            'absl_flags_config', 'absl_flags_internal', 'absl_flags_marshalling', 'absl_flags_parse',
+            'absl_flags_private_handle_accessor', 'absl_flags_program_name', 'absl_flags_reflection',
+            'absl_flags_usage', 'absl_flags_usage_internal',
+        )
+    else:
+        absl_glob = pathlib.Path(os.environ['PREFIX']).glob('lib/libabsl_*.so')
+        absl_libs = tuple(lib.stem[3:] for lib in absl_glob)
+    EXTENSION_LIBRARIES += absl_libs
 if BUILD_WITH_SYSTEM_GRPC_CORE:
     EXTENSION_LIBRARIES += ('gpr', 'grpc', )
     if "win32" in sys.platform:
         EXTENSION_LIBRARIES += ('libprotoc', 'libprotobuf', 'libprotobuf-lite', 'upb', 'address_sorting', )
-        EXTENSION_LIBRARIES += tuple(lib.stem for lib in pathlib.Path(os.environ['LIBRARY_LIB']).glob('absl_*.lib'))
 
 DEFINE_MACROS = (("_WIN32_WINNT", 0x600),)
 asm_files = []
