@@ -44,4 +44,4 @@ static void* upb_global_allocfunc(upb_alloc* alloc, void* ptr, size_t oldsize,
   }
 }
 
-upb_alloc upb_alloc_global = {&upb_global_allocfunc};
+UPB_DLL upb_alloc upb_alloc_global = {&upb_global_allocfunc};
