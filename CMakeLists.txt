@@ -1572,6 +1572,11 @@ if(WIN32 AND MSVC)
   set_target_properties(gpr PROPERTIES COMPILE_PDB_NAME "gpr"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
   )
+  # More details in include/grpc/support/port_platform.h
+  set_target_properties(gpr PROPERTIES DEFINE_SYMBOL "GPR_DLL_EXPORTS")
+  if(BUILD_SHARED_LIBS)
+    target_compile_definitions(gpr INTERFACE GPR_DLL_IMPORTS)
+  endif()
   if(gRPC_INSTALL)
     install(FILES ${CMAKE_CURRENT_BINARY_DIR}/gpr.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
@@ -2457,6 +2462,11 @@ if(WIN32 AND MSVC)
   set_target_properties(grpc PROPERTIES COMPILE_PDB_NAME "grpc"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
   )
+  # More details in include/grpc/support/port_platform.h
+  set_target_properties(grpc PROPERTIES DEFINE_SYMBOL "gRPC_DLL_EXPORTS")
+  if(BUILD_SHARED_LIBS)
+    target_compile_definitions(grpc INTERFACE gRPC_DLL_IMPORTS)
+  endif()
   if(gRPC_INSTALL)
     install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
@@ -3103,6 +3113,11 @@ if(WIN32 AND MSVC)
   set_target_properties(grpc_unsecure PROPERTIES COMPILE_PDB_NAME "grpc_unsecure"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
   )
+  # More details in include/grpc/support/port_platform.h
+  set_target_properties(grpc_unsecure PROPERTIES DEFINE_SYMBOL "gRPC_DLL_EXPORTS")
+  if(BUILD_SHARED_LIBS)
+    target_compile_definitions(grpc_unsecure INTERFACE gRPC_DLL_IMPORTS)
+  endif()
   if(gRPC_INSTALL)
     install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc_unsecure.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
@@ -3791,6 +3806,11 @@ if(WIN32 AND MSVC)
   set_target_properties(grpc++ PROPERTIES COMPILE_PDB_NAME "grpc++"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
   )
+  # More details in include/grpc/support/port_platform.h
+  set_target_properties(grpc++ PROPERTIES DEFINE_SYMBOL "gRPCXX_DLL_EXPORTS")
+  if(BUILD_SHARED_LIBS)
+    target_compile_definitions(grpc++ INTERFACE gRPCXX_DLL_IMPORTS)
+  endif()
   if(gRPC_INSTALL)
     install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc++.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
@@ -4469,6 +4489,11 @@ if(WIN32 AND MSVC)
   set_target_properties(grpc++_unsecure PROPERTIES COMPILE_PDB_NAME "grpc++_unsecure"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
   )
+  # More details in include/grpc/support/port_platform.h
+  set_target_properties(grpc++_unsecure PROPERTIES DEFINE_SYMBOL "gRPCXX_DLL_EXPORTS")
+  if(BUILD_SHARED_LIBS)
+    target_compile_definitions(grpc++_unsecure INTERFACE gRPCXX_DLL_IMPORTS)
+  endif()
   if(gRPC_INSTALL)
     install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc++_unsecure.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
