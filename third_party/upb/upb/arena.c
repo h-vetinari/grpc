@@ -61,7 +61,7 @@ static uintptr_t upb_cleanup_metadata(uint32_t* cleanup,
   return (uintptr_t)cleanup | has_initial_block;
 }
 
-upb_alloc upb_alloc_global = {&upb_global_allocfunc};
+UPB_DLL upb_alloc upb_alloc_global = {&upb_global_allocfunc};
 
 /* upb_Arena ******************************************************************/
 
