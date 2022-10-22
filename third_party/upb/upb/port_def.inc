@@ -260,3 +260,30 @@ void __asan_unpoison_memory_region(void const volatile *addr, size_t size);
 #else
 #define UPB_TREAT_PROTO2_ENUMS_LIKE_PROTO3 0
 #endif
+
+// UPB_DLL
+// inspired by https://github.com/abseil/abseil-cpp/blob/20220623.1/absl/base/config.h#L730-L747
+//
+// When building upb as a DLL, this macro expands to `__declspec(dllexport)`
+// so we can annotate symbols appropriately as being exported. When used in
+// headers consuming a DLL, this macro expands to `__declspec(dllimport)` so
+// that consumers know the symbol is defined inside the DLL. In all other cases,
+// the macro expands to nothing.
+// Note: UPB_DLL_EXPORTS is set in CMakeLists.txt when building shared upb
+//       UPB_DLL_IMPORTS is set by us as part of the interface for consumers of the DLL
+#if defined(UPB_DLL_EXPORTS)
+#define UPB_DLL __declspec(dllexport)
+#elif defined(UPB_DLL_IMPORTS)
+#define UPB_DLL __declspec(dllimport)
+#else
+#define UPB_DLL
+#endif // defined(UPB_DLL_EXPORTS)
+
+// same for gRPC
+#if defined(gRPC_DLL_EXPORTS)
+#define GRPC_DLL __declspec(dllexport)
+#elif defined(gRPC_DLL_IMPORTS)
+#define GRPC_DLL __declspec(dllimport)
+#else
+#define GRPC_DLL
+#endif // defined(gRPC_DLL_EXPORTS)

@@ -24,7 +24,7 @@ struct grpc_gcp_AltsContext;
 struct grpc_gcp_AltsContext_PeerAttributesEntry;
 typedef struct grpc_gcp_AltsContext grpc_gcp_AltsContext;
 typedef struct grpc_gcp_AltsContext_PeerAttributesEntry grpc_gcp_AltsContext_PeerAttributesEntry;
-extern const upb_MiniTable grpc_gcp_AltsContext_msginit;
+extern const GRPC_DLL upb_MiniTable grpc_gcp_AltsContext_msginit;
 extern const upb_MiniTable grpc_gcp_AltsContext_PeerAttributesEntry_msginit;
 struct grpc_gcp_RpcProtocolVersions;
 extern const upb_MiniTable grpc_gcp_RpcProtocolVersions_msginit;
