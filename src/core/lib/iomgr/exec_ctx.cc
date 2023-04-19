@@ -56,9 +56,9 @@ static void exec_ctx_sched(grpc_closure* closure) {
 
 namespace grpc_core {
 
-thread_local ExecCtx* ExecCtx::exec_ctx_;
-thread_local ApplicationCallbackExecCtx*
-    ApplicationCallbackExecCtx::callback_exec_ctx_;
+// both ctx's below cannot be thread_local on windows
+ExecCtx* ExecCtx::exec_ctx_;
+ApplicationCallbackExecCtx* ApplicationCallbackExecCtx::callback_exec_ctx_;
 
 bool ExecCtx::Flush() {
   bool did_something = false;
