@@ -211,7 +211,9 @@ class GRPC_DLL ExecCtx {
   unsigned starting_cpu_ = std::numeric_limits<unsigned>::max();
 
   ScopedTimeCache time_cache_;
-  static thread_local ExecCtx* exec_ctx_;
+
+  // cannot be thread_local on windows
+  static ExecCtx* exec_ctx_;
   ExecCtx* last_exec_ctx_ = Get();
 };
 
@@ -326,7 +328,9 @@ class GRPC_DLL ApplicationCallbackExecCtx {
   uintptr_t flags_{0u};
   grpc_completion_queue_functor* head_{nullptr};
   grpc_completion_queue_functor* tail_{nullptr};
-  static thread_local ApplicationCallbackExecCtx* callback_exec_ctx_;
+
+  // cannot be thread_local on windows
+  static ApplicationCallbackExecCtx* callback_exec_ctx_;
 };
 
 }  // namespace grpc_core
