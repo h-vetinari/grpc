@@ -378,7 +378,8 @@ grpc_channel_credentials* grpc_google_default_credentials_create(
   grpc_channel_credentials* result = nullptr;
   grpc_core::RefCountedPtr<grpc_call_credentials> call_creds(call_credentials);
   grpc_error_handle error;
-  grpc_core::ExecCtx exec_ctx;
+  grpc_core::ExecCtx;
+  exec_ctx;
 
   GRPC_API_TRACE("grpc_google_default_credentials_create(%p)", 1,
                  (call_credentials));
@@ -419,7 +420,8 @@ void set_gce_tenancy_checker_for_testing(grpc_gce_tenancy_checker checker) {
 }
 
 void grpc_flush_cached_google_default_credentials(void) {
-  ExecCtx exec_ctx;
+  ExecCtx;
+  exec_ctx;
   gpr_once_init(&g_once, init_default_credentials);
   MutexLock lock(g_state_mu);
   g_metadata_server_available = 0;

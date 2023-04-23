@@ -170,7 +170,8 @@ BUILD_WITH_SYSTEM_ABSL = os.environ.get('GRPC_PYTHON_BUILD_SYSTEM_ABSL', False)
 BUILD_WITH_STATIC_LIBSTDCXX = _env_bool_value(
     'GRPC_PYTHON_BUILD_WITH_STATIC_LIBSTDCXX', 'False')
 
-BUILD_WITH_SYSTEM_GRPC_CORE = _env_bool_value('GRPC_PYTHON_BUILD_SYSTEM_GRPC_CORE', 'False')
+BUILD_WITH_SYSTEM_GRPC_CORE = _env_bool_value(
+    'GRPC_PYTHON_BUILD_SYSTEM_GRPC_CORE', 'False')
 
 # For local development use only: This skips building gRPC Core and its
 # dependencies, including protobuf and boringssl. This allows "incremental"
@@ -205,7 +206,6 @@ ENABLE_DOCUMENTATION_BUILD = _env_bool_value(
 def check_linker_need_libatomic():
     if sys.platform == 'win32':
         return False
-
     """Test if linker on system needs libatomic."""
     code_test = (b'#include <atomic>\n' +
                  b'int main() { return std::atomic<int64_t>{}; }')
@@ -331,9 +331,15 @@ if "win32" in sys.platform:
     )
 if BUILD_WITH_SYSTEM_OPENSSL:
     if not "win32" in sys.platform:
-        EXTENSION_LIBRARIES += ('ssl', 'crypto',)
+        EXTENSION_LIBRARIES += (
+            'ssl',
+            'crypto',
+        )
     else:
-        EXTENSION_LIBRARIES += ('libssl', 'libcrypto',)
+        EXTENSION_LIBRARIES += (
+            'libssl',
+            'libcrypto',
+        )
 if BUILD_WITH_SYSTEM_ZLIB:
     EXTENSION_LIBRARIES += ('z',)
 if BUILD_WITH_SYSTEM_CARES:
@@ -343,19 +349,37 @@ if BUILD_WITH_SYSTEM_RE2:
 if BUILD_WITH_SYSTEM_ABSL:
     if "win32" in sys.platform:
         absl_libs = (
-            'abseil_dll', 'absl_flags', 'absl_flags_commandlineflag', 'absl_flags_commandlineflag_internal',
-            'absl_flags_config', 'absl_flags_internal', 'absl_flags_marshalling', 'absl_flags_parse',
-            'absl_flags_private_handle_accessor', 'absl_flags_program_name', 'absl_flags_reflection',
-            'absl_flags_usage', 'absl_flags_usage_internal',
+            'abseil_dll',
+            'absl_flags',
+            'absl_flags_commandlineflag',
+            'absl_flags_commandlineflag_internal',
+            'absl_flags_config',
+            'absl_flags_internal',
+            'absl_flags_marshalling',
+            'absl_flags_parse',
+            'absl_flags_private_handle_accessor',
+            'absl_flags_program_name',
+            'absl_flags_reflection',
+            'absl_flags_usage',
+            'absl_flags_usage_internal',
         )
     else:
         absl_glob = pathlib.Path(os.environ['PREFIX']).glob('lib/libabsl_*.so')
         absl_libs = tuple(lib.stem[3:] for lib in absl_glob)
     EXTENSION_LIBRARIES += absl_libs
 if BUILD_WITH_SYSTEM_GRPC_CORE:
-    EXTENSION_LIBRARIES += ('gpr', 'grpc', )
+    EXTENSION_LIBRARIES += (
+        'gpr',
+        'grpc',
+    )
     if "win32" in sys.platform:
-        EXTENSION_LIBRARIES += ('libprotoc', 'libprotobuf', 'libprotobuf-lite', 'upb', 'address_sorting', )
+        EXTENSION_LIBRARIES += (
+            'libprotoc',
+            'libprotobuf',
+            'libprotobuf-lite',
+            'upb',
+            'address_sorting',
+        )
 
 DEFINE_MACROS = (('_WIN32_WINNT', 0x600),)
 asm_files = []

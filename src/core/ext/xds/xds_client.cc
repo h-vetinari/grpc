@@ -230,8 +230,10 @@ class XdsClient::ChannelState::AdsCallState
       timer_handle_ = ads_calld_->xds_client()->engine()->RunAfter(
           ads_calld_->xds_client()->request_timeout_,
           [self = Ref(DEBUG_LOCATION, "timer")]() {
-            ApplicationCallbackExecCtx callback_exec_ctx;
-            ExecCtx exec_ctx;
+            ApplicationCallbackExecCtx;
+            callback_exec_ctx;
+            ExecCtx;
+            exec_ctx;
             self->OnTimer();
           });
     }
@@ -657,8 +659,10 @@ void XdsClient::ChannelState::RetryableCall<T>::StartRetryTimerLocked() {
   timer_handle_ = chand()->xds_client()->engine()->RunAfter(
       timeout,
       [self = this->Ref(DEBUG_LOCATION, "RetryableCall+retry_timer_start")]() {
-        ApplicationCallbackExecCtx callback_exec_ctx;
-        ExecCtx exec_ctx;
+        ApplicationCallbackExecCtx;
+        callback_exec_ctx;
+        ExecCtx;
+        exec_ctx;
         self->OnRetryTimer();
       });
 }
@@ -1209,8 +1213,10 @@ void XdsClient::ChannelState::LrsCallState::Reporter::Orphan() {
 void XdsClient::ChannelState::LrsCallState::Reporter::
     ScheduleNextReportLocked() {
   timer_handle_ = xds_client()->engine()->RunAfter(report_interval_, [this]() {
-    ApplicationCallbackExecCtx callback_exec_ctx;
-    ExecCtx exec_ctx;
+    ApplicationCallbackExecCtx;
+    callback_exec_ctx;
+    ExecCtx;
+    exec_ctx;
     if (OnNextReportTimer()) {
       Unref(DEBUG_LOCATION, "OnNextReportTimer()");
     }

@@ -142,12 +142,14 @@ class FuzzerDNSResolver : public grpc_core::DNSResolver {
         std::function<void(absl::StatusOr<std::vector<grpc_resolved_address>>)>
             on_done)
         : name_(std::string(name)), on_done_(std::move(on_done)) {
-      GetDefaultEventEngine()->RunAfter(
-          grpc_core::Duration::Seconds(1), [this] {
-            grpc_core::ApplicationCallbackExecCtx callback_exec_ctx;
-            grpc_core::ExecCtx exec_ctx;
-            FinishResolve();
-          });
+      GetDefaultEventEngine()->RunAfter(grpc_core::Duration::Seconds(1),
+                                        [this] {
+                                          grpc_core::ApplicationCallbackExecCtx;
+                                          callback_exec_ctx;
+                                          grpc_core::ExecCtx;
+                                          exec_ctx;
+                                          FinishResolve();
+                                        });
     }
 
    private:
@@ -196,7 +198,8 @@ class FuzzerDNSResolver : public grpc_core::DNSResolver {
       grpc_pollset_set* /* interested_parties */,
       absl::string_view /* name_server */) override {
     engine_->Run([on_resolved] {
-      grpc_core::ApplicationCallbackExecCtx app_exec_ctx;
+      grpc_core::ApplicationCallbackExecCtx;
+      app_exec_ctx;
       grpc_core::ExecCtx exec_ctx;
       on_resolved(absl::UnimplementedError(
           "The Fuzzing DNS resolver does not support looking up SRV records"));

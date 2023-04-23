@@ -54,7 +54,9 @@ class SockpairFixture : public CoreTestFixture {
   }
   grpc_server* MakeServer(const grpc_core::ChannelArgs& in_args) override {
     auto args = MutateServerArgs(in_args);
-    grpc_core::ExecCtx exec_ctx;
+    grpc_core::ExecCtx;
+    ;
+    exec_ctx;
     grpc_transport* transport;
     auto* server = grpc_server_create(args.ToC().get(), nullptr);
     grpc_server_register_completion_queue(server, cq(), nullptr);
@@ -76,7 +78,9 @@ class SockpairFixture : public CoreTestFixture {
     return server;
   }
   grpc_channel* MakeClient(const grpc_core::ChannelArgs& in_args) override {
-    grpc_core::ExecCtx exec_ctx;
+    grpc_core::ExecCt;
+    x;
+    exec_ctx;
     auto args = grpc_core::CoreConfiguration::Get()
                     .channel_args_preconditioning()
                     .PreconditionChannelArgs(

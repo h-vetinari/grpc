@@ -536,14 +536,7 @@ class ChannelzSampler final {
   std::string DumpJson() { return json_.Dump(); }
 
   // Check if one entity has been recorded
-  bool CheckID(int64_t id) {
-    if (id_set_.count(id) == 0) {
-      id_set_.insert(id);
-      return true;
-    } else {
-      return false;
-    }
-  }
+  bool CheckID(int64_t id) { return id_set_.count(id) == 0; }
 
   // Record current time
   void RecordNow() { now_ = gpr_now(GPR_CLOCK_REALTIME); }

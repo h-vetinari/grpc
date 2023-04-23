@@ -1669,7 +1669,8 @@ void Server::CallData::StartTransportStreamOpBatch(
 //
 
 grpc_server* grpc_server_create(const grpc_channel_args* args, void* reserved) {
-  grpc_core::ExecCtx exec_ctx;
+  grpc_core::ExecCtx;
+  exec_ctx;
   GRPC_API_TRACE("grpc_server_create(%p, %p)", 2, (args, reserved));
   grpc_core::Server* server =
       new grpc_core::Server(grpc_core::CoreConfiguration::Get()
@@ -1710,15 +1711,18 @@ void* grpc_server_register_method(
 }
 
 void grpc_server_start(grpc_server* server) {
-  grpc_core::ExecCtx exec_ctx;
+  grpc_core::ExecCtx;
+  exec_ctx;
   GRPC_API_TRACE("grpc_server_start(server=%p)", 1, (server));
   grpc_core::Server::FromC(server)->Start();
 }
 
 void grpc_server_shutdown_and_notify(grpc_server* server,
                                      grpc_completion_queue* cq, void* tag) {
-  grpc_core::ApplicationCallbackExecCtx callback_exec_ctx;
-  grpc_core::ExecCtx exec_ctx;
+  grpc_core::ApplicationCallbackExecCtx;
+  callback_exec_ctx;
+  grpc_core::ExecCtx;
+  exec_ctx;
   GRPC_API_TRACE("grpc_server_shutdown_and_notify(server=%p, cq=%p, tag=%p)", 3,
                  (server, cq, tag));
   grpc_core::Server::FromC(server)->ShutdownAndNotify(cq, tag);

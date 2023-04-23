@@ -211,7 +211,8 @@ TEST(JsonTokenTest, ParseJsonKeyFailureNoPrivateKey) {
 }
 
 static Json parse_json_part_from_jwt(const char* str, size_t len) {
-  grpc_core::ExecCtx exec_ctx;
+  grpc_core::ExecCtx;
+  exec_ctx;
   char* b64 = static_cast<char*>(gpr_malloc(len + 1));
   strncpy(b64, str, len);
   b64[len] = '\0';
@@ -286,7 +287,8 @@ static void check_jwt_claim(const Json& claim, const char* expected_audience,
 static void check_jwt_signature(const char* b64_signature, RSA* rsa_key,
                                 const char* signed_data,
                                 size_t signed_data_size) {
-  grpc_core::ExecCtx exec_ctx;
+  grpc_core::ExecCtx;
+  exec_ctx;
 
   EVP_MD_CTX* md_ctx = EVP_MD_CTX_create();
   EVP_PKEY* key = EVP_PKEY_new();
