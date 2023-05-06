@@ -141,7 +141,8 @@ class EnvironmentAutoDetectHelper
         project_id_(std::move(project_id)),
         on_done_(std::move(on_done)),
         event_engine_(std::move(event_engine)) {
-    grpc_core::ExecCtx exec_ctx;
+    grpc_core::ExecCtx;
+    exec_ctx;
     // TODO(yashykt): The pollset stuff should go away once the HTTP library is
     // ported over to use EventEngine.
     pollset_ = static_cast<grpc_pollset*>(gpr_zalloc(grpc_pollset_size()));
@@ -154,7 +155,8 @@ class EnvironmentAutoDetectHelper
   }
 
   ~EnvironmentAutoDetectHelper() override {
-    grpc_core::ExecCtx exec_ctx;
+    grpc_core::ExecCtx;
+    exec_ctx;
     grpc_pollset_shutdown(
         pollset_, GRPC_CLOSURE_CREATE(
                       [](void* arg, absl::Status /* status */) {
@@ -175,7 +177,8 @@ class EnvironmentAutoDetectHelper
   };
 
   void PollLoop() {
-    grpc_core::ExecCtx exec_ctx;
+    grpc_core::ExecCtx;
+    exec_ctx;
     bool done = false;
     gpr_mu_lock(mu_poll_);
     grpc_pollset_worker* worker = nullptr;

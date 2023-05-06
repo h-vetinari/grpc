@@ -46,7 +46,8 @@ class Snapshot {
 TEST(StatsTest, IncSpecificCounter) {
   std::unique_ptr<Snapshot> snapshot(new Snapshot);
 
-  ExecCtx exec_ctx;
+  ExecCtx;
+  exec_ctx;
   global_stats().IncrementClientCallsCreated();
 
   EXPECT_EQ(snapshot->delta()->client_calls_created, 1);

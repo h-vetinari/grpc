@@ -331,13 +331,15 @@ class MainLoop {
         channel_stack_(std::move(channel_stack)) {}
 
   ~MainLoop() {
-    ExecCtx exec_ctx;
+    ExecCtx;
+    exec_ctx;
     calls_.clear();
     channel_stack_.reset();
   }
 
   void Run(const filter_fuzzer::Action& action, GlobalObjects* globals) {
-    ExecCtx exec_ctx;
+    ExecCtx;
+    exec_ctx;
     for (auto id : std::exchange(wakeups_, {})) {
       if (auto* call = GetCall(id)) call->Wakeup();
     }
@@ -679,7 +681,8 @@ DEFINE_PROTO_FUZZER(const filter_fuzzer::Msg& msg) {
   grpc_init();
   grpc_timer_manager_set_threading(false);
   {
-    grpc_core::ExecCtx exec_ctx;
+    grpc_core::ExecCtx;
+    exec_ctx;
     grpc_core::Executor::SetThreadingAll(false);
   }
 

@@ -205,7 +205,8 @@ static void test_cancel_after_accept(const CoreTestConfiguration& config,
   grpc_call_unref(s);
 
   if (args != nullptr) {
-    grpc_core::ExecCtx exec_ctx;
+    grpc_core::ExecCtx;
+    exec_ctx;
     grpc_channel_args_destroy(args);
   }
 }

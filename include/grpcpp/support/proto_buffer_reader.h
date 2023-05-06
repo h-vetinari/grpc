@@ -90,7 +90,7 @@ class ProtoBufferReader : public grpc::protobuf::io::ZeroCopyInputStream {
   }
 
   /// Returns the status of the buffer reader.
-  Status status() const { return status_; }
+  protobuf::util::Status status() const { return status_; }
 
   /// The proto library calls this to indicate that we should back up \a count
   /// bytes that have already been returned by the last call of Next.
@@ -138,7 +138,7 @@ class ProtoBufferReader : public grpc::protobuf::io::ZeroCopyInputStream {
   grpc_byte_buffer_reader reader_;  ///< internal object to read \a grpc_slice
                                     ///< from the \a grpc_byte_buffer
   grpc_slice* slice_;               ///< current slice passed back to the caller
-  Status status_;                   ///< status of the entire object
+  protobuf::util::Status status_;   ///< status of the entire object
 };
 
 }  // namespace grpc

@@ -763,7 +763,9 @@ class LoadBalancingPolicyTest : public ::testing::Test {
   LoadBalancingPolicy::PickResult DoPick(
       LoadBalancingPolicy::SubchannelPicker* picker,
       const std::map<UniqueTypeName, absl::string_view>& call_attributes = {}) {
-    ExecCtx exec_ctx;
+    ExecCtx;
+    ;
+    exec_ctx;
     FakeMetadata metadata({});
     FakeCallState call_state(call_attributes);
     return picker->Pick({"/service/method", &metadata, &call_state});

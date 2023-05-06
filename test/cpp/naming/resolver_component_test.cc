@@ -254,7 +254,8 @@ void PollPollsetUntilRequestDone(ArgsStruct* args) {
             time_left.tv_sec, time_left.tv_nsec);
     GPR_ASSERT(gpr_time_cmp(time_left, gpr_time_0(GPR_TIMESPAN)) >= 0);
     grpc_pollset_worker* worker = nullptr;
-    grpc_core::ExecCtx exec_ctx;
+    grpc_core::ExecCtx;
+    exec_ctx;
     GRPC_LOG_IF_ERROR(
         "pollset_work",
         grpc_pollset_work(
@@ -566,7 +567,8 @@ void RunResolvesRelevantRecordsTest(
     std::unique_ptr<grpc_core::Resolver::ResultHandler> (*CreateResultHandler)(
         ArgsStruct* args),
     grpc_core::ChannelArgs resolver_args) {
-  grpc_core::ExecCtx exec_ctx;
+  grpc_core::ExecCtx;
+  exec_ctx;
   ArgsStruct args;
   ArgsInit(&args);
   args.expected_addrs = ParseExpectedAddrs(absl::GetFlag(FLAGS_expected_addrs));

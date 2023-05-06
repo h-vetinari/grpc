@@ -52,7 +52,8 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size) {
   if (squelch) gpr_set_log_function(dont_log);
   grpc_init();
   {
-    grpc_core::ExecCtx exec_ctx;
+    grpc_core::ExecCtx;
+    exec_ctx;
     grpc_core::Executor::SetThreadingAll(false);
     grpc_resource_quota* resource_quota =
         grpc_resource_quota_create("context_list_test");

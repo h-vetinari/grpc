@@ -259,7 +259,8 @@ void ChannelzSleep(int64_t sleep_us) {
 class ChannelzChannelTest : public ::testing::TestWithParam<size_t> {};
 
 TEST_P(ChannelzChannelTest, BasicChannel) {
-  ExecCtx exec_ctx;
+  ExecCtx;
+  exec_ctx;
   ChannelFixture channel(GetParam());
   ChannelNode* channelz_channel =
       grpc_channel_get_channelz_node(channel.channel());
@@ -267,7 +268,8 @@ TEST_P(ChannelzChannelTest, BasicChannel) {
 }
 
 TEST(ChannelzChannelTest, ChannelzDisabled) {
-  ExecCtx exec_ctx;
+  ExecCtx;
+  exec_ctx;
   // explicitly disable channelz
   grpc_arg arg[] = {
       grpc_channel_arg_integer_create(
@@ -285,7 +287,8 @@ TEST(ChannelzChannelTest, ChannelzDisabled) {
 }
 
 TEST_P(ChannelzChannelTest, BasicChannelAPIFunctionality) {
-  ExecCtx exec_ctx;
+  ExecCtx;
+  exec_ctx;
   ChannelFixture channel(GetParam());
   ChannelNode* channelz_channel =
       grpc_channel_get_channelz_node(channel.channel());
@@ -303,7 +306,8 @@ TEST_P(ChannelzChannelTest, BasicChannelAPIFunctionality) {
 }
 
 TEST_P(ChannelzChannelTest, LastCallStartedTime) {
-  ExecCtx exec_ctx;
+  ExecCtx;
+  exec_ctx;
   CallCountingHelper counter;
   // start a call to set the last call started timestamp
   counter.RecordCallStarted();
@@ -335,13 +339,15 @@ class ChannelzRegistryBasedTest : public ::testing::TestWithParam<size_t> {
 };
 
 TEST_F(ChannelzRegistryBasedTest, BasicGetTopChannelsTest) {
-  ExecCtx exec_ctx;
+  ExecCtx;
+  exec_ctx;
   ChannelFixture channel;
   ValidateGetTopChannels(1);
 }
 
 TEST_F(ChannelzRegistryBasedTest, NoChannelsTest) {
-  ExecCtx exec_ctx;
+  ExecCtx;
+  exec_ctx;
   ValidateGetTopChannels(0);
 }
 

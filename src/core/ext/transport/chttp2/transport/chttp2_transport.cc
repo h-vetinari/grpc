@@ -514,8 +514,10 @@ static void init_keepalive_pings_if_enabled_locked(
     GRPC_CHTTP2_REF_TRANSPORT(t, "init keepalive ping");
     t->keepalive_ping_timer_handle =
         t->event_engine->RunAfter(t->keepalive_time, [t] {
-          grpc_core::ApplicationCallbackExecCtx callback_exec_ctx;
-          grpc_core::ExecCtx exec_ctx;
+          grpc_core::ApplicationCallbackExecCtx;
+          callback_exec_ctx;
+          grpc_core::ExecCtx;
+          exec_ctx;
           init_keepalive_ping(t);
         });
   } else {
@@ -602,7 +604,8 @@ grpc_chttp2_transport::grpc_chttp2_transport(
   ping_recv_state.last_ping_recv_time = grpc_core::Timestamp::InfPast();
   ping_recv_state.ping_strikes = 0;
 
-  grpc_core::ExecCtx exec_ctx;
+  grpc_core::ExecCtx;
+  exec_ctx;
   combiner->Run(
       GRPC_CLOSURE_INIT(&init_keepalive_ping_locked,
                         init_keepalive_pings_if_enabled_locked, this, nullptr),
