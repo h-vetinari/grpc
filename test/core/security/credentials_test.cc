@@ -318,7 +318,8 @@ grpc_http_response http_response(int status, const char* body) {
 // -- Tests. --
 
 TEST(CredentialsTest, TestOauth2TokenFetcherCredsParsingOk) {
-  ExecCtx exec_ctx;
+  ExecCtx;
+  exec_ctx;
   absl::optional<Slice> token_value;
   Duration token_lifetime;
   grpc_http_response response = http_response(200, valid_oauth2_json_response);
@@ -332,7 +333,8 @@ TEST(CredentialsTest, TestOauth2TokenFetcherCredsParsingOk) {
 }
 
 TEST(CredentialsTest, TestOauth2TokenFetcherCredsParsingBadHttpStatus) {
-  ExecCtx exec_ctx;
+  ExecCtx;
+  exec_ctx;
   absl::optional<Slice> token_value;
   Duration token_lifetime;
   grpc_http_response response = http_response(401, valid_oauth2_json_response);

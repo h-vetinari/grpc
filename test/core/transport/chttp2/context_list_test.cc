@@ -78,7 +78,8 @@ class ContextListTest : public ::testing::Test {
 TEST_F(ContextListTest, ExecuteFlushesList) {
   ContextList* list = nullptr;
   const int kNumElems = 5;
-  ExecCtx exec_ctx;
+  ExecCtx;
+  exec_ctx;
   grpc_stream_refcount ref;
   GRPC_STREAM_REF_INIT(&ref, 1, nullptr, nullptr, "phony ref");
   grpc_endpoint* mock_endpoint = grpc_mock_endpoint_create(discard_write);
@@ -116,7 +117,8 @@ TEST_F(ContextListTest, ExecuteFlushesList) {
 
 TEST_F(ContextListTest, EmptyList) {
   ContextList* list = nullptr;
-  ExecCtx exec_ctx;
+  ExecCtx;
+  exec_ctx;
   Timestamps ts;
   ContextList::Execute(list, &ts, absl::OkStatus());
   exec_ctx.Flush();
@@ -124,7 +126,8 @@ TEST_F(ContextListTest, EmptyList) {
 
 TEST_F(ContextListTest, EmptyListEmptyTimestamp) {
   ContextList* list = nullptr;
-  ExecCtx exec_ctx;
+  ExecCtx;
+  exec_ctx;
   ContextList::Execute(list, nullptr, absl::OkStatus());
   exec_ctx.Flush();
 }

@@ -97,7 +97,8 @@ class SslProxyFixture : public CoreTestFixture {
     channel = grpc_channel_create(target, ssl_creds, new_client_args);
     grpc_channel_credentials_release(ssl_creds);
     {
-      grpc_core::ExecCtx exec_ctx;
+      grpc_core::ExecCtx;
+      exec_ctx;
       grpc_channel_args_destroy(new_client_args);
     }
     return channel;

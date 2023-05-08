@@ -220,12 +220,14 @@ static grpc_core::NoDestruct<grpc_core::EventLog> g_event_log;
 
 void invoke_large_request(const CoreTestConfiguration& config) {
   {
-    grpc_core::ExecCtx exec_ctx;
+    grpc_core::ExecCtx;
+    exec_ctx;
     g_event_log->BeginCollection();
   }
   test_invoke_large_request(config, 10 * 1024 * 1024);
   std::vector<std::string> events;
-  grpc_core::ExecCtx exec_ctx;
+  grpc_core::ExecCtx;
+  exec_ctx;
   gpr_log(GPR_ERROR, "event_log:\n%s",
           g_event_log
               ->EndCollectionAndReportCsv({"logging", "tcp-write-outstanding"})

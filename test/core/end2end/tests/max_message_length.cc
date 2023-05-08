@@ -135,7 +135,8 @@ static void test_max_message_length_on_request(
   auto f = begin_test(config, "test_max_request_message_length", client_args,
                       server_args);
   {
-    grpc_core::ExecCtx exec_ctx;
+    grpc_core::ExecCtx;
+    exec_ctx;
     if (client_args != nullptr) grpc_channel_args_destroy(client_args);
     if (server_args != nullptr) grpc_channel_args_destroy(server_args);
   }
@@ -316,7 +317,8 @@ static void test_max_message_length_on_response(
   auto f = begin_test(config, "test_max_response_message_length", client_args,
                       server_args);
   {
-    grpc_core::ExecCtx exec_ctx;
+    grpc_core::ExecCtx;
+    exec_ctx;
     if (client_args != nullptr) grpc_channel_args_destroy(client_args);
     if (server_args != nullptr) grpc_channel_args_destroy(server_args);
   }
@@ -465,7 +467,8 @@ static void test_max_receive_message_length_on_compressed_request(
   auto f = begin_test(config, "test_max_request_message_length", nullptr,
                       server_args);
   {
-    grpc_core::ExecCtx exec_ctx;
+    grpc_core::ExecCtx;
+    exec_ctx;
     grpc_channel_args_destroy(server_args);
   }
   grpc_core::CqVerifier cqv(f->cq());
@@ -602,7 +605,8 @@ static void test_max_receive_message_length_on_compressed_response(
   auto f = begin_test(config, "test_max_response_message_length", client_args,
                       nullptr);
   {
-    grpc_core::ExecCtx exec_ctx;
+    grpc_core::ExecCtx;
+    exec_ctx;
     grpc_channel_args_destroy(client_args);
   }
   grpc_core::CqVerifier cqv(f->cq());

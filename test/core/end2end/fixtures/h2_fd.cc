@@ -59,7 +59,8 @@ class FdFixture : public CoreTestFixture {
 
  private:
   grpc_server* MakeServer(const grpc_core::ChannelArgs& args) override {
-    grpc_core::ExecCtx exec_ctx;
+    grpc_core::ExecCtx;
+    exec_ctx;
     auto* server = grpc_server_create(args.ToC().get(), nullptr);
     grpc_server_register_completion_queue(server, cq(), nullptr);
     grpc_server_start(server);
@@ -69,7 +70,8 @@ class FdFixture : public CoreTestFixture {
     return server;
   }
   grpc_channel* MakeClient(const grpc_core::ChannelArgs& args) override {
-    grpc_core::ExecCtx exec_ctx;
+    grpc_core::ExecCtx;
+    exec_ctx;
     grpc_channel_credentials* creds = grpc_insecure_credentials_create();
     auto* client = grpc_channel_create_from_fd("fixture_client", fd_pair_[0],
                                                creds, args.ToC().get());
