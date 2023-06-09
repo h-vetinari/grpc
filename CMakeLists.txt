@@ -4540,6 +4540,7 @@ target_link_libraries(grpc++_unsecure
   ${_gRPC_ALLTARGETS_LIBRARIES}
   grpc_unsecure
   ${_gRPC_PROTOBUF_LIBRARIES}
+  grpc++
 )
 
 foreach(_hdr
