@@ -4169,6 +4169,7 @@ target_link_libraries(grpc++_unsecure
   ${_gRPC_ZLIB_LIBRARIES}
   ${_gRPC_ALLTARGETS_LIBRARIES}
   grpc_unsecure
+  grpc++
 )
 
 foreach(_hdr
