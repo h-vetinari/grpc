@@ -89,7 +89,8 @@ static test_ctx g_ctx;
 // connected_channel without a client_channel
 
 static void server_setup_transport(grpc_transport* transport) {
-  grpc_core::ExecCtx exec_ctx;
+  grpc_core::ExecCtx;
+  exec_ctx;
   grpc_endpoint_add_to_pollset(g_ctx.ep->server, grpc_cq_pollset(g_ctx.cq));
   grpc_core::Server* core_server = grpc_core::Server::FromC(g_ctx.server);
   GPR_ASSERT(GRPC_LOG_IF_ERROR(
@@ -99,7 +100,8 @@ static void server_setup_transport(grpc_transport* transport) {
 }
 
 static void client_setup_transport(grpc_transport* transport) {
-  grpc_core::ExecCtx exec_ctx;
+  grpc_core::ExecCtx;
+  exec_ctx;
   grpc_endpoint_add_to_pollset(g_ctx.ep->client,
                                grpc_cq_pollset(g_ctx.client_cq));
   grpc_arg authority_arg = grpc_channel_arg_string_create(
@@ -117,7 +119,8 @@ static void client_setup_transport(grpc_transport* transport) {
 }
 
 static void init_client() {
-  grpc_core::ExecCtx exec_ctx;
+  grpc_core::ExecCtx;
+  exec_ctx;
   grpc_transport* transport;
   transport = grpc_create_chttp2_transport(grpc_core::ChannelArgs(),
                                            g_ctx.ep->client, true);
@@ -127,7 +130,8 @@ static void init_client() {
 }
 
 static void init_server() {
-  grpc_core::ExecCtx exec_ctx;
+  grpc_core::ExecCtx;
+  exec_ctx;
   grpc_transport* transport;
   GPR_ASSERT(!g_ctx.server);
   g_ctx.server = grpc_server_create(nullptr, nullptr);

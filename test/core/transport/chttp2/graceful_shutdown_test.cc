@@ -76,7 +76,8 @@ class GracefulShutdownTest : public ::testing::Test {
 
   // Sets up the client and server
   void SetupAndStart() {
-    ExecCtx exec_ctx;
+    ExecCtx;
+    exec_ctx;
     cq_ = grpc_completion_queue_create_for_next(nullptr);
     cqv_ = std::make_unique<CqVerifier>(cq_);
     grpc_arg server_args[] = {
@@ -106,7 +107,8 @@ class GracefulShutdownTest : public ::testing::Test {
           grpc_completion_queue* client_cq =
               grpc_completion_queue_create_for_next(nullptr);
           {
-            ExecCtx exec_ctx;
+            ExecCtx;
+            exec_ctx;
             grpc_endpoint_add_to_pollset(fds_.client,
                                          grpc_cq_pollset(client_cq));
             grpc_endpoint_add_to_pollset(fds_.server,
@@ -136,7 +138,8 @@ class GracefulShutdownTest : public ::testing::Test {
   // Shuts down and destroys the client and server.
   void ShutdownAndDestroy() {
     shutdown_ = true;
-    ExecCtx exec_ctx;
+    ExecCtx;
+    exec_ctx;
     grpc_endpoint_shutdown(fds_.client, GRPC_ERROR_CREATE("Client shutdown"));
     ExecCtx::Get()->Flush();
     client_poll_thread_->join();

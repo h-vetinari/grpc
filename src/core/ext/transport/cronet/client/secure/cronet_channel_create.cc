@@ -60,7 +60,8 @@ GRPCAPI grpc_channel* grpc_cronet_secure_channel_create(
   grpc_transport* ct = grpc_create_cronet_transport(
       engine, target, channel_args.ToC().get(), reserved);
 
-  grpc_core::ExecCtx exec_ctx;
+  grpc_core::ExecCtx;
+  exec_ctx;
   auto channel = grpc_core::Channel::Create(target, channel_args,
                                             GRPC_CLIENT_DIRECT_CHANNEL, ct);
   return channel.ok() ? channel->release()->c_ptr() : nullptr;

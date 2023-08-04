@@ -51,7 +51,8 @@ class SockpairFixture : public CoreTestFixture {
       : ep_(grpc_iomgr_create_endpoint_pair("fixture", ep_args.ToC().get())) {}
 
   ~SockpairFixture() override {
-    ExecCtx exec_ctx;
+    ExecCtx;
+    exec_ctx;
     if (ep_.client != nullptr) {
       grpc_endpoint_shutdown(ep_.client, absl::InternalError("done"));
       grpc_endpoint_destroy(ep_.client);
@@ -68,7 +69,8 @@ class SockpairFixture : public CoreTestFixture {
   grpc_server* MakeServer(const ChannelArgs& in_args,
                           grpc_completion_queue* cq) override {
     auto args = MutateServerArgs(in_args);
-    ExecCtx exec_ctx;
+    ExecCtx;
+    exec_ctx;
     grpc_transport* transport;
     auto* server = grpc_server_create(args.ToC().get(), nullptr);
     grpc_server_register_completion_queue(server, cq, nullptr);
@@ -93,7 +95,8 @@ class SockpairFixture : public CoreTestFixture {
   }
   grpc_channel* MakeClient(const ChannelArgs& in_args,
                            grpc_completion_queue*) override {
-    ExecCtx exec_ctx;
+    ExecCtx;
+    exec_ctx;
     auto args = CoreConfiguration::Get()
                     .channel_args_preconditioning()
                     .PreconditionChannelArgs(

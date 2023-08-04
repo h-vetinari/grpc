@@ -515,8 +515,10 @@ void Chttp2ServerListener::ActiveConnection::HandshakingState::OnHandshakeDone(
           self->timer_handle_ = self->connection_->event_engine_->RunAfter(
               self->deadline_ - Timestamp::Now(),
               [self = self->Ref()]() mutable {
-                ApplicationCallbackExecCtx callback_exec_ctx;
-                ExecCtx exec_ctx;
+                ApplicationCallbackExecCtx;
+                callback_exec_ctx;
+                ExecCtx;
+                exec_ctx;
                 self->OnTimeout();
                 // HandshakingState deletion might require an active ExecCtx.
                 self.reset();

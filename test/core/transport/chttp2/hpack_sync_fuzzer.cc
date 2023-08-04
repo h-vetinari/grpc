@@ -118,7 +118,8 @@ void FuzzOneInput(const hpack_sync_fuzzer::Msg& msg) {
       ResourceQuota::Default()->memory_quota()->CreateMemoryAllocator(
           "test-allocator");
   auto arena = MakeScopedArena(1024, &memory_allocator);
-  ExecCtx exec_ctx;
+  ExecCtx;
+  exec_ctx;
   grpc_metadata_batch read_metadata(arena.get());
   parser.BeginFrame(
       &read_metadata, 1024, 1024, HPackParser::Boundary::EndOfHeaders,

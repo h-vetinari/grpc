@@ -193,7 +193,8 @@ static grpc_channel* secure_test_create_channel(const char* addr) {
       grpc_channel_args_copy_and_add(nullptr, &ssl_name_override, 1);
   grpc_channel* channel = grpc_channel_create(addr, ssl_creds, new_client_args);
   {
-    grpc_core::ExecCtx exec_ctx;
+    grpc_core::ExecCtx;
+    exec_ctx;
     grpc_channel_args_destroy(new_client_args);
   }
   grpc_channel_credentials_release(ssl_creds);

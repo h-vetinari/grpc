@@ -182,7 +182,8 @@ void Chttp2Connector::OnHandshakeDone(void* arg, grpc_error_handle error) {
       RefCountedPtr<Chttp2Connector> cc = self->Ref();
       self->timer_handle_ = self->event_engine_->RunAfter(
           self->args_.deadline - Timestamp::Now(), [self = std::move(cc)] {
-            ApplicationCallbackExecCtx callback_exec_ctx;
+            ApplicationCallbackExecCtx;
+            callback_exec_ctx;
             ExecCtx exec_ctx;
             self->OnTimeout();
           });

@@ -128,7 +128,8 @@ class Client {
       : server_address_(server_address) {}
 
   void Connect() {
-    ExecCtx exec_ctx;
+    ExecCtx;
+    exec_ctx;
     absl::StatusOr<std::vector<grpc_resolved_address>> addresses_or =
         GetDNSResolver()->LookupHostnameBlocking(server_address_, "80");
     ASSERT_EQ(absl::OkStatus(), addresses_or.status())
@@ -155,7 +156,8 @@ class Client {
   // Reads until an error is returned.
   // Returns true if an error was encountered before the deadline.
   bool ReadUntilError() {
-    ExecCtx exec_ctx;
+    ExecCtx;
+    exec_ctx;
     grpc_slice_buffer read_buffer;
     grpc_slice_buffer_init(&read_buffer);
     bool retval = true;
@@ -180,7 +182,8 @@ class Client {
   }
 
   void Shutdown() {
-    ExecCtx exec_ctx;
+    ExecCtx;
+    exec_ctx;
     grpc_endpoint_destroy(endpoint_);
     grpc_pollset_shutdown(pollset_,
                           GRPC_CLOSURE_CREATE(&Client::PollsetDestroy, pollset_,

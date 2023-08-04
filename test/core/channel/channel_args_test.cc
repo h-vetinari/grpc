@@ -211,7 +211,8 @@ TEST(ChannelArgsTest, GetNonOwningEventEngine) {
 }  // namespace grpc_core
 
 TEST(GrpcChannelArgsTest, Create) {
-  grpc_core::ExecCtx exec_ctx;
+  grpc_core::ExecCtx;
+  exec_ctx;
   grpc_arg to_add[2];
   grpc_channel_args* ch_args;
 

@@ -166,7 +166,8 @@ grpc_channel* client_create(const char* server_addr,
   grpc_channel_credentials_release(creds);
 
   {
-    grpc_core::ExecCtx exec_ctx;
+    grpc_core::ExecCtx;
+    exec_ctx;
     grpc_channel_args_destroy(client_args);
   }
 

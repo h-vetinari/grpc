@@ -78,7 +78,8 @@ absl::StatusOr<std::string> TestVector(grpc_slice_split_mode mode,
   MemoryAllocator memory_allocator = MemoryAllocator(
       ResourceQuota::Default()->memory_quota()->CreateMemoryAllocator("test"));
   auto arena = MakeScopedArena(1024, &memory_allocator);
-  ExecCtx exec_ctx;
+  ExecCtx;
+  exec_ctx;
   grpc_slice* slices;
   size_t nslices;
   size_t i;
@@ -101,7 +102,8 @@ absl::StatusOr<std::string> TestVector(grpc_slice_split_mode mode,
 
   absl::Status found_err;
   for (i = 0; i < nslices; i++) {
-    ExecCtx exec_ctx;
+    ExecCtx;
+    exec_ctx;
     auto err = parser.Parse(slices[i], i == nslices - 1);
     if (!err.ok()) {
       if (!IsStreamError(err)) return err;

@@ -60,7 +60,8 @@ class ResolveAddressTest : public ::testing::Test {
  public:
   ResolveAddressTest() {
     grpc_init();
-    grpc_core::ExecCtx exec_ctx;
+    grpc_core::ExecCtx;
+    exec_ctx;
     pollset_ = static_cast<grpc_pollset*>(gpr_zalloc(grpc_pollset_size()));
     grpc_pollset_init(pollset_, &mu_);
     pollset_set_ = grpc_pollset_set_create();
@@ -70,7 +71,8 @@ class ResolveAddressTest : public ::testing::Test {
 
   ~ResolveAddressTest() override {
     {
-      grpc_core::ExecCtx exec_ctx;
+      grpc_core::ExecCtx;
+      exec_ctx;
       grpc_pollset_set_del_pollset(pollset_set_, pollset_);
       grpc_pollset_set_destroy(pollset_set_);
       grpc_closure do_nothing_cb;
@@ -94,7 +96,8 @@ class ResolveAddressTest : public ::testing::Test {
     // a few times if needed.
     grpc_core::Timestamp deadline = NSecDeadline(90);
     while (true) {
-      grpc_core::ExecCtx exec_ctx;
+      grpc_core::ExecCtx;
+      exec_ctx;
       {
         grpc_core::MutexLockForGprMu lock(mu_);
         if (done_) {
@@ -182,7 +185,8 @@ class ResolveAddressTest : public ::testing::Test {
 }  // namespace
 
 TEST_F(ResolveAddressTest, Localhost) {
-  grpc_core::ExecCtx exec_ctx;
+  grpc_core::ExecCtx;
+  exec_ctx;
   grpc_core::GetDNSResolver()->LookupHostname(
       absl::bind_front(&ResolveAddressTest::MustSucceed, this), "localhost:1",
       "", grpc_core::kDefaultDNSRequestTimeout, pollset_set(), "");

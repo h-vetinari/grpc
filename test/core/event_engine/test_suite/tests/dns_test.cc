@@ -28,4 +28,7 @@ void InitDNSTests() {}
 class EventEngineDNSTest : public EventEngineTest {};
 
 // TODO(hork): establish meaningful tests
-TEST_F(EventEngineDNSTest, TODO) { grpc_core::ExecCtx exec_ctx; }
+TEST_F(EventEngineDNSTest, TODO) {
+  grpc_core::ExecCtx;
+  exec_ctx;
+}

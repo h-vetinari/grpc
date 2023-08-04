@@ -100,7 +100,8 @@ TEST_F(EventEngineServerTest, CannotBindAfterStarted) {
 // For each data transfer, verify that data written at one end of the stream
 // equals data read at the other end of the stream.
 TEST_F(EventEngineServerTest, ServerConnectExchangeBidiDataTransferTest) {
-  grpc_core::ExecCtx ctx;
+  grpc_core::ExecCtx;
+  ctx;
   std::shared_ptr<EventEngine> oracle_ee(this->NewOracleEventEngine());
   std::shared_ptr<EventEngine> test_ee(this->NewEventEngine());
   auto memory_quota = std::make_unique<grpc_core::MemoryQuota>("bar");
@@ -172,7 +173,8 @@ TEST_F(EventEngineServerTest, ServerConnectExchangeBidiDataTransferTest) {
 // exchange and verify random number of messages over each connection.
 TEST_F(EventEngineServerTest,
        ServerMultipleIPv6ConnectionsToOneOracleListenerTest) {
-  grpc_core::ExecCtx ctx;
+  grpc_core::ExecCtx;
+  ctx;
   static constexpr int kNumListenerAddresses = 10;  // N
   static constexpr int kNumConnections = 10;        // M
   std::shared_ptr<EventEngine> oracle_ee(this->NewOracleEventEngine());
@@ -265,7 +267,8 @@ TEST_F(EventEngineServerTest,
       auto worker = [client_endpoint = client_endpoint.get(),
                      server_endpoint =
                          server_endpoint.get()](bool client_to_server) {
-        grpc_core::ExecCtx ctx;
+        grpc_core::ExecCtx;
+        ctx;
         for (int i = 0; i < kNumExchangedMessages; i++) {
           // If client_to_server is true, send from client to server and
           // verify data read at the server. Otherwise send data from server

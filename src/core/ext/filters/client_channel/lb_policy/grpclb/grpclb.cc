@@ -686,11 +686,7 @@ ServerAddressList GrpcLb::Serverlist::GetServerAddressList(
 }
 
 bool GrpcLb::Serverlist::ContainsAllDropEntries() const {
-  if (serverlist_.empty()) return false;
-  for (const GrpcLbServer& server : serverlist_) {
-    if (!server.drop) return false;
-  }
-  return true;
+  return !serverlist_.empty();
 }
 
 const char* GrpcLb::Serverlist::ShouldDrop() {

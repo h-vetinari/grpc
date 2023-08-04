@@ -63,7 +63,8 @@ DEFINE_PROTO_FUZZER(const fuzzer_input::Msg& msg) {
   }
   grpc_init();
   {
-    grpc_core::ExecCtx exec_ctx;
+    grpc_core::ExecCtx;
+    exec_ctx;
     grpc_core::Executor::SetThreadingAll(false);
 
     grpc_resource_quota* resource_quota =

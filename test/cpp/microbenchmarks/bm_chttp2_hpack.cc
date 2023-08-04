@@ -56,7 +56,8 @@ static grpc_slice MakeSlice(const std::vector<uint8_t>& bytes) {
 //
 
 static void BM_HpackEncoderInitDestroy(benchmark::State& state) {
-  grpc_core::ExecCtx exec_ctx;
+  grpc_core::ExecCtx;
+  exec_ctx;
   for (auto _ : state) {
     grpc_core::HPackCompressor c;
     grpc_core::ExecCtx::Get()->Flush();
@@ -65,7 +66,8 @@ static void BM_HpackEncoderInitDestroy(benchmark::State& state) {
 BENCHMARK(BM_HpackEncoderInitDestroy);
 
 static void BM_HpackEncoderEncodeDeadline(benchmark::State& state) {
-  grpc_core::ExecCtx exec_ctx;
+  grpc_core::ExecCtx;
+  exec_ctx;
   grpc_core::Timestamp saved_now = grpc_core::Timestamp::Now();
 
   grpc_core::MemoryAllocator memory_allocator =
@@ -101,7 +103,8 @@ BENCHMARK(BM_HpackEncoderEncodeDeadline);
 
 template <class Fixture>
 static void BM_HpackEncoderEncodeHeader(benchmark::State& state) {
-  grpc_core::ExecCtx exec_ctx;
+  grpc_core::ExecCtx;
+  exec_ctx;
   static bool logged_representative_output = false;
 
   grpc_core::MemoryAllocator memory_allocator =

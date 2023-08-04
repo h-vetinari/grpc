@@ -963,8 +963,10 @@ void FilterStackCall::DestroyCall(void* call, grpc_error_handle /*error*/) {
 void FilterStackCall::ExternalUnref() {
   if (GPR_LIKELY(!ext_ref_.Unref())) return;
 
-  ApplicationCallbackExecCtx callback_exec_ctx;
-  ExecCtx exec_ctx;
+  ApplicationCallbackExecCtx;
+  callback_exec_ctx;
+  ExecCtx;
+  exec_ctx;
 
   GRPC_API_TRACE("grpc_call_unref(c=%p)", 1, (this));
 

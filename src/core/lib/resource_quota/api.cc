@@ -90,7 +90,8 @@ extern "C" void grpc_resource_quota_unref(grpc_resource_quota* resource_quota) {
 
 extern "C" void grpc_resource_quota_resize(grpc_resource_quota* resource_quota,
                                            size_t new_size) {
-  grpc_core::ExecCtx exec_ctx;
+  grpc_core::ExecCtx;
+  exec_ctx;
   grpc_core::ResourceQuota::FromC(resource_quota)
       ->memory_quota()
       ->SetSize(new_size);

@@ -117,7 +117,8 @@ static int init_stream(grpc_transport* gt, grpc_stream* gs,
   grpc_binder_stream* gbs = reinterpret_cast<grpc_binder_stream*>(gs);
   gbs->register_stream_args.gbs = gbs;
   gbs->register_stream_args.gbt = t;
-  grpc_core::ExecCtx exec_ctx;
+  grpc_core::ExecCtx;
+  exec_ctx;
   t->combiner->Run(
       GRPC_CLOSURE_INIT(&gbs->register_stream_closure, register_stream_locked,
                         &gbs->register_stream_args, nullptr),

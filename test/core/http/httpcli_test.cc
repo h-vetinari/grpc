@@ -76,7 +76,8 @@ class HttpRequestTest : public ::testing::Test {
  public:
   HttpRequestTest() {
     grpc_init();
-    grpc_core::ExecCtx exec_ctx;
+    grpc_core::ExecCtx;
+    exec_ctx;
     grpc_pollset* pollset =
         static_cast<grpc_pollset*>(gpr_zalloc(grpc_pollset_size()));
     grpc_pollset_init(pollset, &mu_);
@@ -84,7 +85,8 @@ class HttpRequestTest : public ::testing::Test {
   }
   ~HttpRequestTest() override {
     {
-      grpc_core::ExecCtx exec_ctx;
+      grpc_core::ExecCtx;
+      exec_ctx;
       grpc_pollset_shutdown(
           grpc_polling_entity_pollset(&pops_),
           GRPC_CLOSURE_CREATE(DestroyPops, &pops_, grpc_schedule_on_exec_ctx));
@@ -141,7 +143,8 @@ struct RequestState {
   explicit RequestState(HttpRequestTest* test) : test(test) {}
 
   ~RequestState() {
-    grpc_core::ExecCtx exec_ctx;
+    grpc_core::ExecCtx;
+    exec_ctx;
     grpc_http_response_destroy(&response);
   }
 

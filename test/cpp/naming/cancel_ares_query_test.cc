@@ -130,7 +130,8 @@ void PollPollsetUntilRequestDone(ArgsStruct* args) {
       break;
     }
     grpc_pollset_worker* worker = nullptr;
-    grpc_core::ExecCtx exec_ctx;
+    grpc_core::ExecCtx;
+    exec_ctx;
     gpr_mu_lock(args->mu);
     GRPC_LOG_IF_ERROR("pollset_work",
                       grpc_pollset_work(args->pollset, &worker,

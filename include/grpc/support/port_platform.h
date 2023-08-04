@@ -54,22 +54,25 @@
 #endif /* WIN32_LEAN_AND_MEAN */
 
 // GPRC_DLL
-// inspired by https://github.com/abseil/abseil-cpp/blob/20220623.1/absl/base/config.h#L730-L747
+// inspired by
+// https://github.com/abseil/abseil-cpp/blob/20220623.1/absl/base/config.h#L730-L747
 //
 // When building gRPC as a DLL, this macro expands to `__declspec(dllexport)`
 // so we can annotate symbols appropriately as being exported. When used in
 // headers consuming a DLL, this macro expands to `__declspec(dllimport)` so
 // that consumers know the symbol is defined inside the DLL. In all other cases,
 // the macro expands to nothing.
-// Note: gRPC_DLL_EXPORTS is set in CMakeLists.txt when building shared grpc{,_unsecure}
-//       gRPC_DLL_IMPORTS is set by us as part of the interface for consumers of the DLL
+// Note: gRPC_DLL_EXPORTS is set in CMakeLists.txt when building shared
+// grpc{,_unsecure}
+//       gRPC_DLL_IMPORTS is set by us as part of the interface for consumers of
+//       the DLL
 #if defined(gRPC_DLL_EXPORTS)
 #define GRPC_DLL __declspec(dllexport)
 #elif defined(gRPC_DLL_IMPORTS)
 #define GRPC_DLL __declspec(dllimport)
 #else
 #define GRPC_DLL
-#endif // defined(gRPC_DLL_EXPORTS)
+#endif  // defined(gRPC_DLL_EXPORTS)
 
 // same for gRPC++
 #if defined(gRPCXX_DLL_EXPORTS)
@@ -78,7 +81,7 @@
 #define GRPCXX_DLL __declspec(dllimport)
 #else
 #define GRPCXX_DLL
-#endif // defined(GRPCXX_DLL_EXPORTS)
+#endif  // defined(GRPCXX_DLL_EXPORTS)
 
 // same for GPR
 #if defined(GPR_DLL_EXPORTS)
@@ -87,7 +90,7 @@
 #define GPR_DLL __declspec(dllimport)
 #else
 #define GPR_DLL
-#endif // defined(GPR_DLL_EXPORTS)
+#endif  // defined(GPR_DLL_EXPORTS)
 
 #ifndef NOMINMAX
 #define GRPC_NOMINMX_WAS_NOT_DEFINED

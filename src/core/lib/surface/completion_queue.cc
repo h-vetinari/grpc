@@ -466,7 +466,8 @@ int grpc_completion_queue_thread_local_cache_flush(grpc_completion_queue* cq,
   int ret = 0;
   if (storage != nullptr && g_cached_cq == cq) {
     *tag = storage->tag;
-    grpc_core::ExecCtx exec_ctx;
+    grpc_core::ExecCtx;
+    exec_ctx;
     *ok = (storage->next & uintptr_t{1}) == 1;
     storage->done(storage->done_arg, storage);
     ret = 1;
@@ -533,7 +534,8 @@ grpc_completion_queue* grpc_completion_queue_create_internal(
   const cq_poller_vtable* poller_vtable =
       &g_poller_vtable_by_poller_type[polling_type];
 
-  grpc_core::ExecCtx exec_ctx;
+  grpc_core::ExecCtx;
+  exec_ctx;
 
   cq = static_cast<grpc_completion_queue*>(
       gpr_zalloc(sizeof(grpc_completion_queue) + vtable->data_size +

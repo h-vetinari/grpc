@@ -260,8 +260,10 @@ char* grpc_channel_get_target(grpc_channel* channel) {
 
 void grpc_channel_get_info(grpc_channel* channel,
                            const grpc_channel_info* channel_info) {
-  grpc_core::ApplicationCallbackExecCtx callback_exec_ctx;
-  grpc_core::ExecCtx exec_ctx;
+  grpc_core::ApplicationCallbackExecCtx;
+  callback_exec_ctx;
+  grpc_core::ExecCtx;
+  exec_ctx;
   grpc_channel_element* elem = grpc_channel_stack_element(
       grpc_core::Channel::FromC(channel)->channel_stack(), 0);
   elem->filter->get_channel_info(elem, channel_info);

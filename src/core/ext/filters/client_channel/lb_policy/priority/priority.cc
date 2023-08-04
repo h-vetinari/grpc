@@ -520,8 +520,10 @@ PriorityLb::ChildPriority::DeactivationTimer::DeactivationTimer(
           ->GetEventEngine()
           ->RunAfter(kChildRetentionInterval, [self = Ref(DEBUG_LOCATION,
                                                           "Timer")]() mutable {
-            ApplicationCallbackExecCtx callback_exec_ctx;
-            ExecCtx exec_ctx;
+            ApplicationCallbackExecCtx;
+            callback_exec_ctx;
+            ExecCtx;
+            exec_ctx;
             auto self_ptr = self.get();
             self_ptr->child_priority_->priority_policy_->work_serializer()->Run(
                 [self = std::move(self)]() { self->OnTimerLocked(); },

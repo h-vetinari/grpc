@@ -515,8 +515,10 @@ static void init_keepalive_pings_if_enabled_locked(
     GRPC_CHTTP2_REF_TRANSPORT(t, "init keepalive ping");
     t->keepalive_ping_timer_handle =
         t->event_engine->RunAfter(t->keepalive_time, [t] {
-          grpc_core::ApplicationCallbackExecCtx callback_exec_ctx;
-          grpc_core::ExecCtx exec_ctx;
+          grpc_core::ApplicationCallbackExecCtx;
+          callback_exec_ctx;
+          grpc_core::ExecCtx;
+          exec_ctx;
           init_keepalive_ping(t);
         });
   } else {

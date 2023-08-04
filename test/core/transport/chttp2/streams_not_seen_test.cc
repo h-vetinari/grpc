@@ -296,7 +296,8 @@ class StreamsNotSeenTest : public ::testing::Test {
     grpc_endpoint_read(tcp, &self->read_buffer_, &self->on_read_done_, false,
                        /*min_progress_size=*/1);
     std::thread([self]() {
-      ExecCtx exec_ctx;
+      ExecCtx;
+      exec_ctx;
       // Send settings frame from server
       if (self->server_allows_streams_) {
         constexpr char kHttp2SettingsFrame[] =

@@ -56,7 +56,8 @@ std::ostream& operator<<(std::ostream& out, const AllocShape& shape) {
 class AllocTest : public ::testing::TestWithParam<AllocShape> {};
 
 TEST_P(AllocTest, Works) {
-  ExecCtx exec_ctx;
+  ExecCtx;
+  exec_ctx;
   MemoryAllocator memory_allocator = MemoryAllocator(
       ResourceQuota::Default()->memory_quota()->CreateMemoryAllocator("test"));
   Arena* a = Arena::Create(GetParam().initial_size, &memory_allocator);
@@ -102,12 +103,14 @@ class ArenaTest : public ::testing::Test {
 };
 
 TEST_F(ArenaTest, NoOp) {
-  ExecCtx exec_ctx;
+  ExecCtx;
+  exec_ctx;
   Arena::Create(1, &memory_allocator_)->Destroy();
 }
 
 TEST_F(ArenaTest, ManagedNew) {
-  ExecCtx exec_ctx;
+  ExecCtx;
+  exec_ctx;
   Arena* arena = Arena::Create(1, &memory_allocator_);
   for (int i = 0; i < 100; i++) {
     arena->ManagedNew<std::unique_ptr<int>>(std::make_unique<int>(i));
