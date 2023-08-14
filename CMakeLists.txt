@@ -4950,7 +4950,7 @@ endif()
 
 endif()
 
-add_library(upb
+add_library(upb STATIC
   third_party/utf8_range/naive.c
   third_party/utf8_range/range2-neon.c
   third_party/utf8_range/range2-sse.c
@@ -5010,12 +5010,6 @@ if(WIN32 AND MSVC)
   set_target_properties(upb PROPERTIES COMPILE_PDB_NAME "upb"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
   )
-  # More details in third_party/upb/upb/port_def.inc;
-  # needs to be separate from gRPC_DLL_{IM,EX}PORTS
-  set_target_properties(upb PROPERTIES DEFINE_SYMBOL "UPB_DLL_EXPORTS")
-  if(BUILD_SHARED_LIBS)
-    target_compile_definitions(upb INTERFACE UPB_DLL_IMPORTS)
-  endif()
   if(gRPC_INSTALL)
     install(FILES ${CMAKE_CURRENT_BINARY_DIR}/upb.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
