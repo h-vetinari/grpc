@@ -2471,9 +2471,9 @@ if(WIN32 AND MSVC)
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
   )
   # More details in include/grpc/support/port_platform.h
-  set_target_properties(grpc PROPERTIES DEFINE_SYMBOL "gRPC_DLL_EXPORTS")
+  set_target_properties(grpc PROPERTIES DEFINE_SYMBOL "GRPC_DLL_EXPORTS")
   if(BUILD_SHARED_LIBS)
-    target_compile_definitions(grpc INTERFACE gRPC_DLL_IMPORTS)
+    target_compile_definitions(grpc INTERFACE GRPC_DLL_IMPORTS)
   endif()
   if(gRPC_INSTALL)
     install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc.pdb
@@ -3126,9 +3126,9 @@ if(WIN32 AND MSVC)
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
   )
   # More details in include/grpc/support/port_platform.h
-  set_target_properties(grpc_unsecure PROPERTIES DEFINE_SYMBOL "gRPC_DLL_EXPORTS")
+  set_target_properties(grpc_unsecure PROPERTIES DEFINE_SYMBOL "GRPC_DLL_EXPORTS")
   if(BUILD_SHARED_LIBS)
-    target_compile_definitions(grpc_unsecure INTERFACE gRPC_DLL_IMPORTS)
+    target_compile_definitions(grpc_unsecure INTERFACE GRPC_DLL_IMPORTS)
   endif()
   if(gRPC_INSTALL)
     install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc_unsecure.pdb
@@ -3458,9 +3458,9 @@ if(WIN32 AND MSVC)
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
   )
   # More details in include/grpc/support/port_platform.h
-  set_target_properties(grpc++ PROPERTIES DEFINE_SYMBOL "gRPCXX_DLL_EXPORTS")
+  set_target_properties(grpc++ PROPERTIES DEFINE_SYMBOL "GRPCXX_DLL_EXPORTS")
   if(BUILD_SHARED_LIBS)
-    target_compile_definitions(grpc++ INTERFACE gRPCXX_DLL_IMPORTS)
+    target_compile_definitions(grpc++ INTERFACE GRPCXX_DLL_IMPORTS)
   endif()
   if(gRPC_INSTALL)
     install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc++.pdb
@@ -4170,9 +4170,9 @@ if(WIN32 AND MSVC)
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
   )
   # More details in include/grpc/support/port_platform.h
-  set_target_properties(grpc++_unsecure PROPERTIES DEFINE_SYMBOL "gRPCXX_DLL_EXPORTS")
+  set_target_properties(grpc++_unsecure PROPERTIES DEFINE_SYMBOL "GRPCXX_DLL_EXPORTS")
   if(BUILD_SHARED_LIBS)
-    target_compile_definitions(grpc++_unsecure INTERFACE gRPCXX_DLL_IMPORTS)
+    target_compile_definitions(grpc++_unsecure INTERFACE GRPCXX_DLL_IMPORTS)
   endif()
   if(gRPC_INSTALL)
     install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc++_unsecure.pdb
