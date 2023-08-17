@@ -83,7 +83,8 @@ class HttpsCliTest : public ::testing::Test {
  public:
   HttpsCliTest() {
     grpc_init();
-    grpc_core::ExecCtx exec_ctx;
+    grpc_core::ExecCtx;
+    exec_ctx;
     grpc_pollset* pollset =
         static_cast<grpc_pollset*>(gpr_zalloc(grpc_pollset_size()));
     grpc_pollset_init(pollset, &mu_);

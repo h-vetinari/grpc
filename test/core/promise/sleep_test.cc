@@ -48,7 +48,8 @@ namespace grpc_core {
 namespace {
 
 TEST(Sleep, Zzzz) {
-  ExecCtx exec_ctx;
+  ExecCtx;
+  exec_ctx;
   Notification done;
   Timestamp done_time = Timestamp::Now() + Duration::Seconds(1);
   auto engine = GetDefaultEventEngine();
@@ -68,7 +69,8 @@ TEST(Sleep, Zzzz) {
 TEST(Sleep, OverlyEagerEventEngine) {
   StrictMock<MockEventEngine> mock_event_engine;
 
-  ExecCtx exec_ctx;
+  ExecCtx;
+  exec_ctx;
   bool done = false;
   // Schedule a sleep for a very long time.
   Timestamp done_time = Timestamp::Now() + Duration::Seconds(1e6);

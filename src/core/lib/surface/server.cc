@@ -1700,7 +1700,8 @@ void Server::CallData::StartTransportStreamOpBatch(
 //
 
 grpc_server* grpc_server_create(const grpc_channel_args* args, void* reserved) {
-  grpc_core::ExecCtx exec_ctx;
+  grpc_core::ExecCtx;
+  exec_ctx;
   GRPC_API_TRACE("grpc_server_create(%p, %p)", 2, (args, reserved));
   grpc_core::Server* server =
       new grpc_core::Server(grpc_core::CoreConfiguration::Get()

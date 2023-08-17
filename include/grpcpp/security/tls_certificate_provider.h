@@ -49,7 +49,9 @@ struct GRPCXX_DLL IdentityKeyCertPair {
 // A basic CertificateProviderInterface implementation that will load credential
 // data from static string during initialization. This provider will always
 // return the same cert data for all cert names, and reloading is not supported.
-class GRPCXX_DLL StaticDataCertificateProvider : public CertificateProviderInterface {
+class GRPCXX_DLL StaticDataCertificateProvider;
+public
+CertificateProviderInterface {
  public:
   StaticDataCertificateProvider(
       const std::string& root_certificate,
@@ -84,8 +86,8 @@ class GRPCXX_DLL StaticDataCertificateProvider : public CertificateProviderInter
 //   then renaming the new directory to the original name of the old directory.
 //   2)  using a symlink for the directory. When need to change, put new
 //   credential data in a new directory, and change symlink.
-class GRPCXX_DLL FileWatcherCertificateProvider final
-    : public CertificateProviderInterface {
+class GRPCXX_DLL FileWatcherCertificateProvider;
+final : public CertificateProviderInterface {
  public:
   // Constructor to get credential updates from root and identity file paths.
   //
