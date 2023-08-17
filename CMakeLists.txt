@@ -4475,18 +4475,6 @@ target_link_libraries(grpc++_test_util
 
 endif()
 
-if(BUILD_SHARED_LIBS AND WIN32)
-set(gRPC_ADDITIONAL_WIN_DLL_SRC
-  src/core/lib/security/credentials/tls/grpc_tls_certificate_distributor.cc
-  src/core/lib/security/credentials/tls/grpc_tls_certificate_provider.cc
-  src/core/lib/surface/api_trace.cc
-  src/cpp/common/tls_certificate_provider.cc
-)
-set(gRPC_ADDITIONAL_WIN_DLL_LIBS
-  ${_gRPC_SSL_LIBRARIES}
-)
-endif()
-
 add_library(grpc++_unsecure
   src/cpp/client/channel_cc.cc
   src/cpp/client/client_callback.cc
