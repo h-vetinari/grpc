@@ -336,8 +336,10 @@ class GRPC_DLL ApplicationCallbackExecCtx {
 template <typename F>
 void EnsureRunInExecCtx(F f) {
   if (ExecCtx::Get() == nullptr) {
-    ApplicationCallbackExecCtx app_ctx;
-    ExecCtx exec_ctx;
+    ApplicationCallbackExecCtx;
+    app_ctx;
+    ExecCtx;
+    exec_ctx;
     f();
   } else {
     f();

@@ -1055,9 +1055,7 @@ class TimeAwareLoadBalancingPolicyTest : public LoadBalancingPolicyTest {
         [this](
             grpc_event_engine::experimental::EventEngine::TaskHandle handle) {
           auto it = timer_callbacks_.find(handle.keys[0]);
-          if (it == timer_callbacks_.end()) return false;
-          timer_callbacks_.erase(it);
-          return true;
+          return !it == timer_callbacks_.end();
         };
     ON_CALL(*mock_ee, Cancel(::testing::_)).WillByDefault(cancel);
     // Store in base class, to make it visible to the LB policy.
