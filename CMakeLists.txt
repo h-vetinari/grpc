@@ -1494,7 +1494,7 @@ if(gRPC_BUILD_TESTS)
 endif()
 
 
-add_library(address_sorting
+add_library(address_sorting 
   third_party/address_sorting/address_sorting.c
   third_party/address_sorting/address_sorting_posix.c
   third_party/address_sorting/address_sorting_windows.c
@@ -1547,7 +1547,7 @@ if(gRPC_INSTALL)
 endif()
 
 
-add_library(gpr
+add_library(gpr 
   src/core/lib/config/config_vars.cc
   src/core/lib/config/config_vars_non_generated.cc
   src/core/lib/config/load_config.cc
@@ -1607,7 +1607,7 @@ if(WIN32 AND MSVC)
   set_target_properties(gpr PROPERTIES COMPILE_PDB_NAME "gpr"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
   )
-
+    
   set_target_properties(gpr PROPERTIES DEFINE_SYMBOL "GPR_DLL_EXPORTS")
   if(BUILD_SHARED_LIBS)
     target_compile_definitions(gpr INTERFACE GPR_DLL_IMPORTS)
@@ -1710,7 +1710,7 @@ if(gRPC_INSTALL)
 endif()
 
 
-add_library(grpc
+add_library(grpc 
   src/core/ext/filters/backend_metrics/backend_metric_filter.cc
   src/core/ext/filters/census/grpc_context.cc
   src/core/ext/filters/channel_idle/channel_idle_filter.cc
@@ -2497,7 +2497,7 @@ if(WIN32 AND MSVC)
   set_target_properties(grpc PROPERTIES COMPILE_PDB_NAME "grpc"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
   )
-
+    
   set_target_properties(grpc PROPERTIES DEFINE_SYMBOL "GRPC_DLL_EXPORTS")
   if(BUILD_SHARED_LIBS)
     target_compile_definitions(grpc INTERFACE GRPC_DLL_IMPORTS)
@@ -2640,7 +2640,7 @@ endif()
 
 if(gRPC_BUILD_TESTS)
 
-add_library(grpc_test_util
+add_library(grpc_test_util 
   test/core/event_engine/test_init.cc
   test/core/util/build.cc
   test/core/util/port.cc
@@ -2699,7 +2699,7 @@ endif()
 endif()
 if(gRPC_BUILD_TESTS)
 
-add_library(grpc_test_util_unsecure
+add_library(grpc_test_util_unsecure 
   test/core/event_engine/test_init.cc
   test/core/util/build.cc
   test/core/util/port.cc
@@ -2756,7 +2756,7 @@ endif()
 
 endif()
 
-add_library(grpc_unsecure
+add_library(grpc_unsecure 
   src/core/ext/filters/backend_metrics/backend_metric_filter.cc
   src/core/ext/filters/census/grpc_context.cc
   src/core/ext/filters/channel_idle/channel_idle_filter.cc
@@ -3148,7 +3148,7 @@ if(WIN32 AND MSVC)
   set_target_properties(grpc_unsecure PROPERTIES COMPILE_PDB_NAME "grpc_unsecure"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
   )
-
+    
   set_target_properties(grpc_unsecure PROPERTIES DEFINE_SYMBOL "GRPC_DLL_EXPORTS")
   if(BUILD_SHARED_LIBS)
     target_compile_definitions(grpc_unsecure INTERFACE GRPC_DLL_IMPORTS)
@@ -3289,7 +3289,7 @@ endif()
 
 if(gRPC_BUILD_TESTS)
 
-add_library(gtest
+add_library(gtest 
   third_party/googletest/googlemock/src/gmock-cardinalities.cc
   third_party/googletest/googlemock/src/gmock-internal-utils.cc
   third_party/googletest/googlemock/src/gmock-matchers.cc
@@ -3355,7 +3355,7 @@ target_link_libraries(gtest
 
 endif()
 
-add_library(upb
+add_library(upb ${_gRPC_STATIC_WIN32}
   third_party/upb/upb/base/status.c
   third_party/upb/upb/collections/array.c
   third_party/upb/upb/collections/map.c
@@ -3427,7 +3427,7 @@ if(gRPC_INSTALL)
 endif()
 
 
-add_library(upb_collections_lib
+add_library(upb_collections_lib 
   third_party/upb/upb/base/status.c
   third_party/upb/upb/collections/array.c
   third_party/upb/upb/collections/map.c
@@ -3489,7 +3489,7 @@ if(gRPC_INSTALL)
 endif()
 
 
-add_library(upb_json_lib
+add_library(upb_json_lib 
   src/core/ext/upb-generated/google/protobuf/descriptor.upb.c
   third_party/upb/upb/json/decode.c
   third_party/upb/upb/json/encode.c
@@ -3561,7 +3561,7 @@ if(gRPC_INSTALL)
 endif()
 
 
-add_library(upb_textformat_lib
+add_library(upb_textformat_lib 
   src/core/ext/upb-generated/google/protobuf/descriptor.upb.c
   third_party/upb/upb/message/accessors.c
   third_party/upb/upb/reflection/def_builder.c
@@ -3632,7 +3632,7 @@ if(gRPC_INSTALL)
 endif()
 
 
-add_library(utf8_range_lib
+add_library(utf8_range_lib 
   third_party/utf8_range/naive.c
   third_party/utf8_range/range2-neon.c
   third_party/utf8_range/range2-sse.c
@@ -3687,7 +3687,7 @@ endif()
 if(gRPC_BUILD_TESTS)
 
 if(gRPC_BUILD_CODEGEN)
-add_library(benchmark_helpers
+add_library(benchmark_helpers 
   ${_gRPC_PROTO_GENS_DIR}/src/proto/grpc/testing/echo.pb.cc
   ${_gRPC_PROTO_GENS_DIR}/src/proto/grpc/testing/echo.grpc.pb.cc
   ${_gRPC_PROTO_GENS_DIR}/src/proto/grpc/testing/echo.pb.h
@@ -3762,7 +3762,7 @@ endif()
 
 endif()
 
-add_library(grpc++
+add_library(grpc++ 
   src/core/ext/transport/binder/client/binder_connector.cc
   src/core/ext/transport/binder/client/channel_create.cc
   src/core/ext/transport/binder/client/channel_create_impl.cc
@@ -3842,7 +3842,7 @@ if(WIN32 AND MSVC)
   set_target_properties(grpc++ PROPERTIES COMPILE_PDB_NAME "grpc++"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
   )
-
+    
   set_target_properties(grpc++ PROPERTIES DEFINE_SYMBOL "GRPCXX_DLL_EXPORTS")
   if(BUILD_SHARED_LIBS)
     target_compile_definitions(grpc++ INTERFACE GRPCXX_DLL_IMPORTS)
@@ -4098,7 +4098,7 @@ if(gRPC_INSTALL)
 endif()
 
 
-add_library(grpc++_alts
+add_library(grpc++_alts 
   src/cpp/common/alts_context.cc
   src/cpp/common/alts_util.cc
   ${gRPC_UPB_GEN_DUPL_SRC}
@@ -4163,7 +4163,7 @@ if(gRPC_INSTALL)
 endif()
 
 
-add_library(grpc++_error_details
+add_library(grpc++_error_details 
   src/cpp/util/error_details.cc
 )
 
@@ -4227,7 +4227,7 @@ endif()
 
 
 if(gRPC_BUILD_CODEGEN)
-add_library(grpc++_reflection
+add_library(grpc++_reflection 
   ${_gRPC_PROTO_GENS_DIR}/src/proto/grpc/reflection/v1alpha/reflection.pb.cc
   ${_gRPC_PROTO_GENS_DIR}/src/proto/grpc/reflection/v1alpha/reflection.grpc.pb.cc
   ${_gRPC_PROTO_GENS_DIR}/src/proto/grpc/reflection/v1alpha/reflection.pb.h
@@ -4299,7 +4299,7 @@ endif()
 endif()
 if(gRPC_BUILD_TESTS)
 
-add_library(grpc++_test
+add_library(grpc++_test 
   src/cpp/client/channel_test_peer.cc
 )
 
@@ -4364,7 +4364,7 @@ endforeach()
 endif()
 if(gRPC_BUILD_TESTS)
 
-add_library(grpc++_test_config
+add_library(grpc++_test_config 
   test/cpp/util/test_config_cc.cc
 )
 
@@ -4410,7 +4410,7 @@ target_link_libraries(grpc++_test_config
 endif()
 if(gRPC_BUILD_TESTS)
 
-add_library(grpc++_test_util
+add_library(grpc++_test_util 
   src/core/lib/gpr/subprocess_posix.cc
   src/core/lib/gpr/subprocess_windows.cc
   test/core/end2end/data/client_certs.cc
@@ -4475,7 +4475,7 @@ target_link_libraries(grpc++_test_util
 
 endif()
 
-add_library(grpc++_unsecure
+add_library(grpc++_unsecure 
   src/cpp/client/channel_cc.cc
   src/cpp/client/client_callback.cc
   src/cpp/client/client_context.cc
@@ -4528,7 +4528,7 @@ if(WIN32 AND MSVC)
   set_target_properties(grpc++_unsecure PROPERTIES COMPILE_PDB_NAME "grpc++_unsecure"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
   )
-
+    
   set_target_properties(grpc++_unsecure PROPERTIES DEFINE_SYMBOL "GRPCXX_DLL_EXPORTS")
   if(BUILD_SHARED_LIBS)
     target_compile_definitions(grpc++_unsecure INTERFACE GRPCXX_DLL_IMPORTS)
@@ -4781,7 +4781,7 @@ if(gRPC_INSTALL)
 endif()
 
 
-add_library(grpc_authorization_provider
+add_library(grpc_authorization_provider 
   src/core/ext/upb-generated/google/protobuf/any.upb.c
   src/core/ext/upb-generated/google/protobuf/descriptor.upb.c
   src/core/ext/upb-generated/google/rpc/status.upb.c
@@ -5183,7 +5183,7 @@ if(gRPC_INSTALL)
 endif()
 
 
-add_library(grpc_plugin_support
+add_library(grpc_plugin_support 
   src/compiler/cpp_generator.cc
   src/compiler/csharp_generator.cc
   src/compiler/node_generator.cc
@@ -5257,7 +5257,7 @@ endif()
 # grpcpp_channelz doesn't build with protobuf-lite
 # See https://github.com/grpc/grpc/issues/19473
 if(gRPC_BUILD_CODEGEN AND NOT gRPC_USE_PROTO_LITE)
-add_library(grpcpp_channelz
+add_library(grpcpp_channelz 
   ${_gRPC_PROTO_GENS_DIR}/src/proto/grpc/channelz/channelz.pb.cc
   ${_gRPC_PROTO_GENS_DIR}/src/proto/grpc/channelz/channelz.grpc.pb.cc
   ${_gRPC_PROTO_GENS_DIR}/src/proto/grpc/channelz/channelz.pb.h
