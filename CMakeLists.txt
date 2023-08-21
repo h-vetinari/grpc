@@ -421,6 +421,7 @@ if(BUILD_SHARED_LIBS AND WIN32)
 set(gRPC_UPB_GEN_DUPL_SRC
   src/core/ext/upb-generated/src/proto/grpc/gcp/altscontext.upb.c
   src/core/ext/upb-generated/src/proto/grpc/health/v1/health.upb.c
+  src/core/ext/upb-generated/src/data/orca/v3/orca_load_report.upb.c
   src/core/ext/upb-generated/src/proto/grpc/gcp/transport_security_common.upb.c
 )
 
