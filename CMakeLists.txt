@@ -8089,6 +8089,7 @@ target_include_directories(authorization_matchers_test
 )
 
 target_link_libraries(authorization_matchers_test
+  ${_gRPC_RE2_LIBRARIES}
   ${_gRPC_ALLTARGETS_LIBRARIES}
   gtest
   grpc_test_util
@@ -16810,6 +16811,7 @@ target_include_directories(grpc_authorization_engine_test
 )
 
 target_link_libraries(grpc_authorization_engine_test
+  ${_gRPC_RE2_LIBRARIES}
   ${_gRPC_ALLTARGETS_LIBRARIES}
   gtest
   grpc_test_util
@@ -19199,6 +19201,7 @@ if(_gRPC_PLATFORM_LINUX OR _gRPC_PLATFORM_MAC OR _gRPC_PLATFORM_POSIX)
   )
 
   target_link_libraries(httpcli_test
+    ${_gRPC_CARES_LIBRARIES}
     ${_gRPC_ALLTARGETS_LIBRARIES}
     gtest
     grpc++_test_util
@@ -21188,6 +21191,7 @@ target_include_directories(matchers_test
 )
 
 target_link_libraries(matchers_test
+  ${_gRPC_RE2_LIBRARIES}
   ${_gRPC_ALLTARGETS_LIBRARIES}
   gtest
   grpc_test_util
@@ -26610,6 +26614,7 @@ target_include_directories(resolve_address_using_ares_resolver_test
 )
 
 target_link_libraries(resolve_address_using_ares_resolver_test
+  ${_gRPC_CARES_LIBRARIES}
   ${_gRPC_ALLTARGETS_LIBRARIES}
   gtest
   grpc_test_util
@@ -26714,6 +26719,7 @@ target_include_directories(resolve_address_using_native_resolver_test
 )
 
 target_link_libraries(resolve_address_using_native_resolver_test
+  ${_gRPC_CARES_LIBRARIES}
   ${_gRPC_ALLTARGETS_LIBRARIES}
   gtest
   grpc_test_util
@@ -39712,6 +39718,7 @@ target_include_directories(xds_common_types_test
 )
 
 target_link_libraries(xds_common_types_test
+  ${_gRPC_RE2_LIBRARIES}
   ${_gRPC_ALLTARGETS_LIBRARIES}
   gtest
   grpc++
@@ -40371,6 +40378,7 @@ target_include_directories(xds_credentials_test
 )
 
 target_link_libraries(xds_credentials_test
+  ${_gRPC_RE2_LIBRARIES}
   ${_gRPC_ALLTARGETS_LIBRARIES}
   gtest
   grpc_test_util
@@ -45336,6 +45344,7 @@ target_include_directories(xds_listener_resource_type_test
 )
 
 target_link_libraries(xds_listener_resource_type_test
+  ${_gRPC_RE2_LIBRARIES}
   ${_gRPC_ALLTARGETS_LIBRARIES}
   gtest
   grpc++
