@@ -7,7 +7,7 @@
 
 #include "upb/mini_table/internal/message.h"
 
-const struct upb_MiniTable _kUpb_MiniTable_Empty = {
+UPB_DLL const struct upb_MiniTable _kUpb_MiniTable_Empty = {
     .subs = NULL,
     .fields = NULL,
     .size = 0,
