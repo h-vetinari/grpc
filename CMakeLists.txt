@@ -3725,6 +3725,12 @@ if(WIN32 AND MSVC)
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
   endif()
+  # More details in third_party/upb/upb/port_def.inc;
+  # needs to be separate from gRPC_DLL_{IM,EX}PORTS
+  set_target_properties(upb_mem_lib PROPERTIES DEFINE_SYMBOL "UPB_MEM_DLL_EXPORTS")
+  if(BUILD_SHARED_LIBS)
+    target_compile_definitions(upb_mem_lib INTERFACE UPB_MEM_DLL_IMPORTS)
+  endif()
 endif()
 
 target_include_directories(upb_mem_lib
@@ -3786,6 +3792,12 @@ if(WIN32 AND MSVC)
     install(FILES ${CMAKE_CURRENT_BINARY_DIR}/upb_message_lib.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
+  endif()
+  # More details in third_party/upb/upb/port_def.inc;
+  # needs to be separate from gRPC_DLL_{IM,EX}PORTS
+  set_target_properties(upb_message_lib PROPERTIES DEFINE_SYMBOL "UPB_MSG_DLL_EXPORTS")
+  if(BUILD_SHARED_LIBS)
+    target_compile_definitions(upb_message_lib INTERFACE UPB_MSG_DLL_IMPORTS)
   endif()
 endif()
 

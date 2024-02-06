@@ -69,8 +69,9 @@ struct upb_MiniTable {
 extern "C" {
 #endif
 
+UPB_MSG_DLL extern const struct upb_MiniTable UPB_PRIVATE(_kUpb_MiniTable_Empty);
+
 UPB_INLINE const struct upb_MiniTable* UPB_PRIVATE(_upb_MiniTable_Empty)(void) {
-  extern const struct upb_MiniTable UPB_PRIVATE(_kUpb_MiniTable_Empty);
 
   return &UPB_PRIVATE(_kUpb_MiniTable_Empty);
 }

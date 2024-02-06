@@ -15,7 +15,7 @@
 #include "upb/port/def.inc"
 
 // A MiniTable for an empty message, used for unlinked sub-messages.
-const struct upb_MiniTable UPB_PRIVATE(_kUpb_MiniTable_Empty) = {
+UPB_MSG_DLL const struct upb_MiniTable UPB_PRIVATE(_kUpb_MiniTable_Empty) = {
     .UPB_PRIVATE(subs) = NULL,
     .UPB_PRIVATE(fields) = NULL,
     .UPB_PRIVATE(size) = sizeof(struct upb_Message),
