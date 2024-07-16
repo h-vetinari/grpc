@@ -3667,6 +3667,9 @@ if(WIN32 AND MSVC)
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
   endif()
+elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+  # see https://github.com/grpc/grpc/issues/36654
+  target_link_options(upb_json_lib PRIVATE -Wl,-undefined,dynamic_lookup)
 endif()
 
 target_include_directories(upb_json_lib
@@ -3880,6 +3883,9 @@ if(WIN32 AND MSVC)
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
   endif()
+elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+  # see https://github.com/grpc/grpc/issues/36654
+  target_link_options(upb_textformat_lib PRIVATE -Wl,-undefined,dynamic_lookup)
 endif()
 
 target_include_directories(upb_textformat_lib
