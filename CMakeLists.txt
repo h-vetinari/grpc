@@ -1711,8 +1711,10 @@ if(WIN32 AND MSVC)
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
   )
   if(BUILD_SHARED_LIBS)
-    set_target_properties(gpr PROPERTIES DEFINE_SYMBOL "GPR_DLL_EXPORTS")
-    target_compile_definitions(gpr INTERFACE "GPR_DLL_IMPORTS")
+    target_compile_definitions(gpr
+    PRIVATE
+      "GPR_DLL_EXPORTS"
+    )
   endif()
   if(gRPC_INSTALL)
     install(FILES ${CMAKE_CURRENT_BINARY_DIR}/gpr.pdb
@@ -2630,8 +2632,11 @@ if(WIN32 AND MSVC)
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
   )
   if(BUILD_SHARED_LIBS)
-    set_target_properties(grpc PROPERTIES DEFINE_SYMBOL "GRPC_DLL_EXPORTS")
-    target_compile_definitions(grpc INTERFACE "GRPC_DLL_IMPORTS")
+    target_compile_definitions(grpc
+    PRIVATE
+      "GRPC_DLL_EXPORTS"
+      "GPR_DLL_IMPORTS"
+    )
   endif()
   if(gRPC_INSTALL)
     install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc.pdb
@@ -2654,39 +2659,34 @@ target_include_directories(grpc
     ${_gRPC_ZLIB_INCLUDE_DIR}
 )
 target_link_libraries(grpc
-  # core libs
-  PUBLIC  ${_gRPC_ALLTARGETS_LIBRARIES}
-  # vendored libs
-  PUBLIC  ${_gRPC_ADDRESS_SORTING_LIBRARIES}
-  PUBLIC  upb_json_lib
-  PUBLIC  upb_textformat_lib
-  # external dependencies used within grpc
-  PRIVATE ${_gRPC_CARES_LIBRARIES}
-  PRIVATE ${_gRPC_RE2_LIBRARIES}
-  PRIVATE ${_gRPC_ZLIB_LIBRARIES}
-  # external dependencies that need to available at runtime
-  PUBLIC  ${_gRPC_SSL_LIBRARIES}
-  PUBLIC  absl::algorithm_container
-  PUBLIC  absl::config
-  PUBLIC  absl::no_destructor
-  PUBLIC  absl::cleanup
-  PUBLIC  absl::flat_hash_map
-  PUBLIC  absl::flat_hash_set
-  PUBLIC  absl::inlined_vector
-  PUBLIC  absl::bind_front
-  PUBLIC  absl::function_ref
-  PUBLIC  absl::hash
-  PUBLIC  absl::type_traits
-  PUBLIC  absl::random_bit_gen_ref
-  PUBLIC  absl::random_distributions
-  PUBLIC  absl::statusor
-  PUBLIC  absl::span
-  PUBLIC  absl::utility
-  # targets which belong to grpc anyway
-  PUBLIC  gpr
+  ${_gRPC_ALLTARGETS_LIBRARIES}
+  upb_json_lib
+  upb_textformat_lib
+  ${_gRPC_RE2_LIBRARIES}
+  ${_gRPC_ZLIB_LIBRARIES}
+  absl::algorithm_container
+  absl::config
+  absl::no_destructor
+  absl::cleanup
+  absl::flat_hash_map
+  absl::flat_hash_set
+  absl::inlined_vector
+  absl::bind_front
+  absl::function_ref
+  absl::hash
+  absl::type_traits
+  absl::random_bit_gen_ref
+  absl::random_distributions
+  absl::statusor
+  absl::span
+  absl::utility
+  ${_gRPC_CARES_LIBRARIES}
+  gpr
+  ${_gRPC_SSL_LIBRARIES}
+  ${_gRPC_ADDRESS_SORTING_LIBRARIES}
 )
 if(_gRPC_PLATFORM_IOS OR _gRPC_PLATFORM_MAC)
-  target_link_libraries(grpc PUBLIC "-framework CoreFoundation")
+  target_link_libraries(grpc "-framework CoreFoundation")
 endif()
 
 foreach(_hdr
@@ -3335,8 +3335,11 @@ if(WIN32 AND MSVC)
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
   )
   if(BUILD_SHARED_LIBS)
-    set_target_properties(grpc_unsecure PROPERTIES DEFINE_SYMBOL "GRPC_DLL_EXPORTS")
-    target_compile_definitions(grpc_unsecure INTERFACE "GRPC_DLL_IMPORTS")
+    target_compile_definitions(grpc_unsecure
+    PRIVATE
+      "GRPC_DLL_EXPORTS"
+      "GPR_DLL_IMPORTS"
+    )
   endif()
   if(gRPC_INSTALL)
     install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc_unsecure.pdb
@@ -3359,37 +3362,32 @@ target_include_directories(grpc_unsecure
     ${_gRPC_ZLIB_INCLUDE_DIR}
 )
 target_link_libraries(grpc_unsecure
-  # core libs
-  PUBLIC  ${_gRPC_ALLTARGETS_LIBRARIES}
-  # vendored libs
-  PUBLIC  ${_gRPC_ADDRESS_SORTING_LIBRARIES}
-  PUBLIC  upb_message_lib
-  PUBLIC  utf8_range_lib
-  # external dependencies used within grpc
-  PRIVATE ${_gRPC_CARES_LIBRARIES}
-  PRIVATE ${_gRPC_ZLIB_LIBRARIES}
-  # external dependencies that need to available at runtime
-  PUBLIC  absl::algorithm_container
-  PUBLIC  absl::config
-  PUBLIC  absl::no_destructor
-  PUBLIC  absl::cleanup
-  PUBLIC  absl::flat_hash_map
-  PUBLIC  absl::flat_hash_set
-  PUBLIC  absl::inlined_vector
-  PUBLIC  absl::bind_front
-  PUBLIC  absl::function_ref
-  PUBLIC  absl::hash
-  PUBLIC  absl::type_traits
-  PUBLIC  absl::random_bit_gen_ref
-  PUBLIC  absl::random_distributions
-  PUBLIC  absl::statusor
-  PUBLIC  absl::span
-  PUBLIC  absl::utility
-  # targets which belong to grpc anyway
-  PUBLIC  gpr
+  ${_gRPC_ALLTARGETS_LIBRARIES}
+  utf8_range_lib
+  upb_message_lib
+  ${_gRPC_ZLIB_LIBRARIES}
+  absl::algorithm_container
+  absl::config
+  absl::no_destructor
+  absl::cleanup
+  absl::flat_hash_map
+  absl::flat_hash_set
+  absl::inlined_vector
+  absl::bind_front
+  absl::function_ref
+  absl::hash
+  absl::type_traits
+  absl::random_bit_gen_ref
+  absl::random_distributions
+  absl::statusor
+  absl::span
+  absl::utility
+  ${_gRPC_CARES_LIBRARIES}
+  gpr
+  ${_gRPC_ADDRESS_SORTING_LIBRARIES}
 )
 if(_gRPC_PLATFORM_IOS OR _gRPC_PLATFORM_MAC)
-  target_link_libraries(grpc_unsecure PUBLIC "-framework CoreFoundation")
+  target_link_libraries(grpc_unsecure "-framework CoreFoundation")
 endif()
 
 foreach(_hdr
@@ -3663,9 +3661,6 @@ if(WIN32 AND MSVC)
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
   endif()
-elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-  # see https://github.com/grpc/grpc/issues/36654
-  target_link_options(upb_json_lib PRIVATE -Wl,-undefined,dynamic_lookup)
 endif()
 
 target_include_directories(upb_json_lib
@@ -3719,12 +3714,6 @@ if(WIN32 AND MSVC)
     install(FILES ${CMAKE_CURRENT_BINARY_DIR}/upb_mem_lib.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
-  endif()
-  # More details in third_party/upb/upb/port_def.inc;
-  # needs to be separate from gRPC_DLL_{IM,EX}PORTS
-  set_target_properties(upb_mem_lib PROPERTIES DEFINE_SYMBOL "UPB_MEM_DLL_EXPORTS")
-  if(BUILD_SHARED_LIBS)
-    target_compile_definitions(upb_mem_lib INTERFACE UPB_MEM_DLL_IMPORTS)
   endif()
 endif()
 
@@ -3787,12 +3776,6 @@ if(WIN32 AND MSVC)
     install(FILES ${CMAKE_CURRENT_BINARY_DIR}/upb_message_lib.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
-  endif()
-  # More details in third_party/upb/upb/port_def.inc;
-  # needs to be separate from gRPC_DLL_{IM,EX}PORTS
-  set_target_properties(upb_message_lib PROPERTIES DEFINE_SYMBOL "UPB_MSG_DLL_EXPORTS")
-  if(BUILD_SHARED_LIBS)
-    target_compile_definitions(upb_message_lib INTERFACE UPB_MSG_DLL_IMPORTS)
   endif()
 endif()
 
@@ -3879,9 +3862,6 @@ if(WIN32 AND MSVC)
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
   endif()
-elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-  # see https://github.com/grpc/grpc/issues/36654
-  target_link_options(upb_textformat_lib PRIVATE -Wl,-undefined,dynamic_lookup)
 endif()
 
 target_include_directories(upb_textformat_lib
@@ -4133,8 +4113,12 @@ if(WIN32 AND MSVC)
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
   )
   if(BUILD_SHARED_LIBS)
-    set_target_properties(grpc++ PROPERTIES DEFINE_SYMBOL "GRPCXX_DLL_EXPORTS")
-    target_compile_definitions(grpc++ INTERFACE "GRPCXX_DLL_IMPORTS")
+    target_compile_definitions(grpc++
+    PRIVATE
+      "GRPCXX_DLL_EXPORTS"
+      "GPR_DLL_IMPORTS"
+      "GRPC_DLL_IMPORTS"
+    )
   endif()
   if(gRPC_INSTALL)
     install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc++.pdb
@@ -4870,8 +4854,12 @@ if(WIN32 AND MSVC)
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
   )
   if(BUILD_SHARED_LIBS)
-    set_target_properties(grpc++_unsecure PROPERTIES DEFINE_SYMBOL "GRPCXX_DLL_EXPORTS")
-    target_compile_definitions(grpc++_unsecure INTERFACE "GRPCXX_DLL_IMPORTS")
+    target_compile_definitions(grpc++_unsecure
+    PRIVATE
+      "GRPCXX_DLL_EXPORTS"
+      "GPR_DLL_IMPORTS"
+      "GRPC_DLL_IMPORTS"
+    )
   endif()
   if(gRPC_INSTALL)
     install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc++_unsecure.pdb
@@ -4898,7 +4886,6 @@ target_link_libraries(grpc++_unsecure
   ${_gRPC_ALLTARGETS_LIBRARIES}
   grpc_unsecure
   ${_gRPC_PROTOBUF_LIBRARIES}
-  grpc++
 )
 
 foreach(_hdr
