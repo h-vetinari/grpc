@@ -18,7 +18,7 @@
 extern "C" {
 #endif
 
-extern const upb_MiniTable envoy__annotations__ResourceAnnotation_msg_init;
+GRPC_UPB_DLL extern const upb_MiniTable envoy__annotations__ResourceAnnotation_msg_init;
 extern const upb_MiniTable* envoy__annotations__ResourceAnnotation_msg_init_ptr;
 extern const upb_MiniTableExtension envoy_annotations_resource_ext;
 

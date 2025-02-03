@@ -17,7 +17,7 @@
 extern "C" {
 #endif
 
-extern _upb_DefPool_Init envoy_type_matcher_v3_node_proto_upbdefinit;
+GRPC_UPB_DLL extern _upb_DefPool_Init envoy_type_matcher_v3_node_proto_upbdefinit;
 
 UPB_INLINE const upb_MessageDef *envoy_type_matcher_v3_NodeMatcher_getmsgdef(upb_DefPool *s) {
   _upb_DefPool_LoadDefInit(s, &envoy_type_matcher_v3_node_proto_upbdefinit);

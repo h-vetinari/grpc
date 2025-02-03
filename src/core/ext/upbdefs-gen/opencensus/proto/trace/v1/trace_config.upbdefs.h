@@ -17,7 +17,7 @@
 extern "C" {
 #endif
 
-extern _upb_DefPool_Init opencensus_proto_trace_v1_trace_config_proto_upbdefinit;
+GRPC_UPB_DLL extern _upb_DefPool_Init opencensus_proto_trace_v1_trace_config_proto_upbdefinit;
 
 UPB_INLINE const upb_MessageDef *opencensus_proto_trace_v1_TraceConfig_getmsgdef(upb_DefPool *s) {
   _upb_DefPool_LoadDefInit(s, &opencensus_proto_trace_v1_trace_config_proto_upbdefinit);

@@ -17,7 +17,7 @@
 extern "C" {
 #endif
 
-extern _upb_DefPool_Init envoy_data_accesslog_v3_accesslog_proto_upbdefinit;
+GRPC_UPB_DLL extern _upb_DefPool_Init envoy_data_accesslog_v3_accesslog_proto_upbdefinit;
 
 UPB_INLINE const upb_MessageDef *envoy_data_accesslog_v3_TCPAccessLogEntry_getmsgdef(upb_DefPool *s) {
   _upb_DefPool_LoadDefInit(s, &envoy_data_accesslog_v3_accesslog_proto_upbdefinit);

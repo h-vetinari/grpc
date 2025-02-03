@@ -17,7 +17,7 @@
 extern "C" {
 #endif
 
-extern _upb_DefPool_Init validate_validate_proto_upbdefinit;
+GRPC_UPB_DLL extern _upb_DefPool_Init validate_validate_proto_upbdefinit;
 
 UPB_INLINE const upb_MessageDef *validate_FieldRules_getmsgdef(upb_DefPool *s) {
   _upb_DefPool_LoadDefInit(s, &validate_validate_proto_upbdefinit);

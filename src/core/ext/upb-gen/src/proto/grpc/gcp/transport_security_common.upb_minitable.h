@@ -18,9 +18,9 @@
 extern "C" {
 #endif
 
-extern const upb_MiniTable grpc__gcp__RpcProtocolVersions_msg_init;
+GRPC_UPB_DLL extern const upb_MiniTable grpc__gcp__RpcProtocolVersions_msg_init;
 extern const upb_MiniTable* grpc__gcp__RpcProtocolVersions_msg_init_ptr;
-extern const upb_MiniTable grpc__gcp__RpcProtocolVersions__Version_msg_init;
+GRPC_UPB_DLL extern const upb_MiniTable grpc__gcp__RpcProtocolVersions__Version_msg_init;
 extern const upb_MiniTable* grpc__gcp__RpcProtocolVersions__Version_msg_init_ptr;
 
 extern const upb_MiniTableFile src_proto_grpc_gcp_transport_security_common_proto_upb_file_layout;

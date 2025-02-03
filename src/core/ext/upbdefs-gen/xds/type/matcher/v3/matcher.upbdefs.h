@@ -17,7 +17,7 @@
 extern "C" {
 #endif
 
-extern _upb_DefPool_Init xds_type_matcher_v3_matcher_proto_upbdefinit;
+GRPC_UPB_DLL extern _upb_DefPool_Init xds_type_matcher_v3_matcher_proto_upbdefinit;
 
 UPB_INLINE const upb_MessageDef *xds_type_matcher_v3_Matcher_getmsgdef(upb_DefPool *s) {
   _upb_DefPool_LoadDefInit(s, &xds_type_matcher_v3_matcher_proto_upbdefinit);

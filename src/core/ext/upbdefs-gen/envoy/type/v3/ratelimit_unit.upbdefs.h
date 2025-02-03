@@ -17,7 +17,7 @@
 extern "C" {
 #endif
 
-extern _upb_DefPool_Init envoy_type_v3_ratelimit_unit_proto_upbdefinit;
+GRPC_UPB_DLL extern _upb_DefPool_Init envoy_type_v3_ratelimit_unit_proto_upbdefinit;
 
 #ifdef __cplusplus
 }  /* extern "C" */

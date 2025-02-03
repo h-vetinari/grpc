@@ -17,7 +17,7 @@
 extern "C" {
 #endif
 
-extern _upb_DefPool_Init xds_annotations_v3_security_proto_upbdefinit;
+GRPC_UPB_DLL extern _upb_DefPool_Init xds_annotations_v3_security_proto_upbdefinit;
 
 UPB_INLINE const upb_MessageDef *xds_annotations_v3_FieldSecurityAnnotation_getmsgdef(upb_DefPool *s) {
   _upb_DefPool_LoadDefInit(s, &xds_annotations_v3_security_proto_upbdefinit);

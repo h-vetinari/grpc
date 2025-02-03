@@ -17,7 +17,7 @@
 extern "C" {
 #endif
 
-extern _upb_DefPool_Init envoy_type_v3_http_status_proto_upbdefinit;
+GRPC_UPB_DLL extern _upb_DefPool_Init envoy_type_v3_http_status_proto_upbdefinit;
 
 UPB_INLINE const upb_MessageDef *envoy_type_v3_HttpStatus_getmsgdef(upb_DefPool *s) {
   _upb_DefPool_LoadDefInit(s, &envoy_type_v3_http_status_proto_upbdefinit);

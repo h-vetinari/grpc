@@ -17,7 +17,7 @@
 extern "C" {
 #endif
 
-extern _upb_DefPool_Init xds_core_v3_extension_proto_upbdefinit;
+GRPC_UPB_DLL extern _upb_DefPool_Init xds_core_v3_extension_proto_upbdefinit;
 
 UPB_INLINE const upb_MessageDef *xds_core_v3_TypedExtensionConfig_getmsgdef(upb_DefPool *s) {
   _upb_DefPool_LoadDefInit(s, &xds_core_v3_extension_proto_upbdefinit);

@@ -18,9 +18,9 @@
 extern "C" {
 #endif
 
-extern const upb_MiniTable xds__core__v3__CollectionEntry_msg_init;
+GRPC_UPB_DLL extern const upb_MiniTable xds__core__v3__CollectionEntry_msg_init;
 extern const upb_MiniTable* xds__core__v3__CollectionEntry_msg_init_ptr;
-extern const upb_MiniTable xds__core__v3__CollectionEntry__InlineEntry_msg_init;
+GRPC_UPB_DLL extern const upb_MiniTable xds__core__v3__CollectionEntry__InlineEntry_msg_init;
 extern const upb_MiniTable* xds__core__v3__CollectionEntry__InlineEntry_msg_init_ptr;
 
 extern const upb_MiniTableFile xds_core_v3_collection_entry_proto_upb_file_layout;

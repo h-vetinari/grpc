@@ -18,7 +18,7 @@
 extern "C" {
 #endif
 
-extern const upb_MiniTable xds__core__v3__CidrRange_msg_init;
+GRPC_UPB_DLL extern const upb_MiniTable xds__core__v3__CidrRange_msg_init;
 extern const upb_MiniTable* xds__core__v3__CidrRange_msg_init_ptr;
 
 extern const upb_MiniTableFile xds_core_v3_cidr_proto_upb_file_layout;

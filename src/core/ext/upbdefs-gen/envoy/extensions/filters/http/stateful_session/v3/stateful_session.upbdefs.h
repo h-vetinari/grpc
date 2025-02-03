@@ -17,7 +17,7 @@
 extern "C" {
 #endif
 
-extern _upb_DefPool_Init envoy_extensions_filters_http_stateful_session_v3_stateful_session_proto_upbdefinit;
+GRPC_UPB_DLL extern _upb_DefPool_Init envoy_extensions_filters_http_stateful_session_v3_stateful_session_proto_upbdefinit;
 
 UPB_INLINE const upb_MessageDef *envoy_extensions_filters_http_stateful_session_v3_StatefulSession_getmsgdef(upb_DefPool *s) {
   _upb_DefPool_LoadDefInit(s, &envoy_extensions_filters_http_stateful_session_v3_stateful_session_proto_upbdefinit);

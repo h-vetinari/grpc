@@ -18,7 +18,7 @@
 extern "C" {
 #endif
 
-extern const upb_MiniTable xds__annotations__v3__FieldSecurityAnnotation_msg_init;
+GRPC_UPB_DLL extern const upb_MiniTable xds__annotations__v3__FieldSecurityAnnotation_msg_init;
 extern const upb_MiniTable* xds__annotations__v3__FieldSecurityAnnotation_msg_init_ptr;
 extern const upb_MiniTableExtension xds_annotations_v3_security_ext;
 

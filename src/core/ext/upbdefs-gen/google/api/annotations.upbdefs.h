@@ -17,7 +17,7 @@
 extern "C" {
 #endif
 
-extern _upb_DefPool_Init google_api_annotations_proto_upbdefinit;
+GRPC_UPB_DLL extern _upb_DefPool_Init google_api_annotations_proto_upbdefinit;
 
 #ifdef __cplusplus
 }  /* extern "C" */

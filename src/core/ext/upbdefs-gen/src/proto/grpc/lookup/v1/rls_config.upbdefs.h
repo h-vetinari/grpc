@@ -17,7 +17,7 @@
 extern "C" {
 #endif
 
-extern _upb_DefPool_Init src_proto_grpc_lookup_v1_rls_config_proto_upbdefinit;
+GRPC_UPB_DLL extern _upb_DefPool_Init src_proto_grpc_lookup_v1_rls_config_proto_upbdefinit;
 
 UPB_INLINE const upb_MessageDef *grpc_lookup_v1_NameMatcher_getmsgdef(upb_DefPool *s) {
   _upb_DefPool_LoadDefInit(s, &src_proto_grpc_lookup_v1_rls_config_proto_upbdefinit);

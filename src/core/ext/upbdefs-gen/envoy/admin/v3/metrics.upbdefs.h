@@ -17,7 +17,7 @@
 extern "C" {
 #endif
 
-extern _upb_DefPool_Init envoy_admin_v3_metrics_proto_upbdefinit;
+GRPC_UPB_DLL extern _upb_DefPool_Init envoy_admin_v3_metrics_proto_upbdefinit;
 
 UPB_INLINE const upb_MessageDef *envoy_admin_v3_SimpleMetric_getmsgdef(upb_DefPool *s) {
   _upb_DefPool_LoadDefInit(s, &envoy_admin_v3_metrics_proto_upbdefinit);

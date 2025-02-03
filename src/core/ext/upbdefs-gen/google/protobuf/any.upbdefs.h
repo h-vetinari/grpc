@@ -17,7 +17,7 @@
 extern "C" {
 #endif
 
-extern _upb_DefPool_Init google_protobuf_any_proto_upbdefinit;
+GRPC_UPB_DLL extern _upb_DefPool_Init google_protobuf_any_proto_upbdefinit;
 
 UPB_INLINE const upb_MessageDef *google_protobuf_Any_getmsgdef(upb_DefPool *s) {
   _upb_DefPool_LoadDefInit(s, &google_protobuf_any_proto_upbdefinit);

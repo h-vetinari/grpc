@@ -18,7 +18,7 @@
 extern "C" {
 #endif
 
-extern const upb_MiniTable udpa__annotations__StatusAnnotation_msg_init;
+GRPC_UPB_DLL extern const upb_MiniTable udpa__annotations__StatusAnnotation_msg_init;
 extern const upb_MiniTable* udpa__annotations__StatusAnnotation_msg_init_ptr;
 extern const upb_MiniTableExtension udpa_annotations_file_status_ext;
 

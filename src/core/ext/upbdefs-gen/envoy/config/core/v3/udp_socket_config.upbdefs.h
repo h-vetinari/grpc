@@ -17,7 +17,7 @@
 extern "C" {
 #endif
 
-extern _upb_DefPool_Init envoy_config_core_v3_udp_socket_config_proto_upbdefinit;
+GRPC_UPB_DLL extern _upb_DefPool_Init envoy_config_core_v3_udp_socket_config_proto_upbdefinit;
 
 UPB_INLINE const upb_MessageDef *envoy_config_core_v3_UdpSocketConfig_getmsgdef(upb_DefPool *s) {
   _upb_DefPool_LoadDefInit(s, &envoy_config_core_v3_udp_socket_config_proto_upbdefinit);
