@@ -448,11 +448,11 @@ void __asan_unpoison_memory_region(void const volatile *addr, size_t size);
 #define UPB_MSG_DLL
 #endif // defined(UPB_MSG_DLL_EXPORTS)
 
-// same for gRPC
-#if defined(gRPC_DLL_EXPORTS)
-#define GRPC_DLL __declspec(dllexport)
-#elif defined(gRPC_DLL_IMPORTS)
-#define GRPC_DLL __declspec(dllimport)
+// same for GRPC_UPB
+#if defined(GRPC_UPB_DLL_EXPORTS)
+#define GRPC_UPB_DLL __declspec(dllexport)
+#elif defined(GRPC_UPB_DLL_EXPORTS)
+#define GRPC_UPB_DLL __declspec(dllimport)
 #else
-#define GRPC_DLL
-#endif // defined(gRPC_DLL_EXPORTS)
+#define GRPC_UPB_DLL
+#endif // defined(GRPC_UPB_DLL_EXPORTS)
