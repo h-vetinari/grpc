@@ -3029,6 +3029,7 @@ add_library(grpc_unsecure
   src/core/tsi/alts/handshaker/transport_security_common_api.cc
   src/core/tsi/fake_transport_security.cc
   src/core/tsi/local_transport_security.cc
+  src/core/tsi/ssl_transport_security_utils.cc
   src/core/tsi/transport_security.cc
   src/core/tsi/transport_security_grpc.cc
   src/core/util/backoff.cc
@@ -3105,6 +3106,7 @@ target_link_libraries(grpc_unsecure
   PRIVATE ${_gRPC_ZLIB_LIBRARIES}
   PRIVATE ${_gRPC_CARES_LIBRARIES}
   # external dependencies that need to available at runtime
+  PUBLIC  ${_gRPC_SSL_LIBRARIES}
   PRIVATE absl::algorithm_container
   PRIVATE absl::config
   PRIVATE absl::no_destructor
