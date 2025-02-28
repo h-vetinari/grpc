@@ -12,9 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set(UPB_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/third_party/upb)
-
-set(_gRPC_UPB_INCLUDE_DIR "${UPB_ROOT_DIR}" "${CMAKE_CURRENT_SOURCE_DIR}/third_party/utf8_range")
+set(_gRPC_UPB_INCLUDE_DIR "${CMAKE_PREFIX_PATH}/include")
 set(_gRPC_UPB_GRPC_GENERATED_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/core/ext/upb-gen" "${CMAKE_CURRENT_SOURCE_DIR}/src/core/ext/upbdefs-gen")
 
 set(_gRPC_UPB_LIBRARIES upb)
