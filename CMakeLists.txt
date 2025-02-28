@@ -707,9 +707,6 @@ protobuf_generate_grpc_cpp_with_import_path_correction(
 protobuf_generate_grpc_cpp_with_import_path_correction(
   src/proto/grpc/status/status.proto src/proto/grpc/status/status.proto
 )
-
-if(gRPC_BUILD_TESTS)
-
 protobuf_generate_grpc_cpp_with_import_path_correction(
   src/proto/grpc/testing/benchmark_service.proto src/proto/grpc/testing/benchmark_service.proto
 )
@@ -1304,6 +1301,7 @@ protobuf_generate_grpc_cpp_with_import_path_correction(
 )
 endif()
 
+if(gRPC_BUILD_TESTS)
   add_custom_target(buildtests_c)
   if(_gRPC_PLATFORM_LINUX OR _gRPC_PLATFORM_MAC OR _gRPC_PLATFORM_POSIX)
     add_dependencies(buildtests_c fd_conservation_posix_test)
@@ -2153,8 +2151,10 @@ if(WIN32 AND MSVC)
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
   )
   if(BUILD_SHARED_LIBS)
-    set_target_properties(gpr PROPERTIES DEFINE_SYMBOL "GPR_DLL_EXPORTS")
-    target_compile_definitions(gpr INTERFACE "GPR_DLL_IMPORTS")
+    target_compile_definitions(gpr
+    PRIVATE
+      "GPR_DLL_EXPORTS"
+    )
   endif()
   if(gRPC_INSTALL)
     install(FILES ${CMAKE_CURRENT_BINARY_DIR}/gpr.pdb
@@ -2261,8 +2261,80 @@ if(gRPC_INSTALL)
 endif()
 
 
-# moved `src/core/ext/upb{,defs}-gen` out of grpc due to https://github.com/grpc/grpc/issues/38394
-add_library(grpc_upb
+add_library(grpc
+  src/core/channelz/channel_trace.cc
+  src/core/channelz/channelz.cc
+  src/core/channelz/channelz_registry.cc
+  src/core/client_channel/backup_poller.cc
+  src/core/client_channel/client_channel.cc
+  src/core/client_channel/client_channel_factory.cc
+  src/core/client_channel/client_channel_filter.cc
+  src/core/client_channel/client_channel_plugin.cc
+  src/core/client_channel/client_channel_service_config.cc
+  src/core/client_channel/direct_channel.cc
+  src/core/client_channel/dynamic_filters.cc
+  src/core/client_channel/global_subchannel_pool.cc
+  src/core/client_channel/lb_metadata.cc
+  src/core/client_channel/load_balanced_call_destination.cc
+  src/core/client_channel/local_subchannel_pool.cc
+  src/core/client_channel/retry_filter.cc
+  src/core/client_channel/retry_filter_legacy_call_data.cc
+  src/core/client_channel/retry_service_config.cc
+  src/core/client_channel/retry_throttle.cc
+  src/core/client_channel/subchannel.cc
+  src/core/client_channel/subchannel_pool_interface.cc
+  src/core/client_channel/subchannel_stream_client.cc
+  src/core/ext/filters/backend_metrics/backend_metric_filter.cc
+  src/core/ext/filters/census/grpc_context.cc
+  src/core/ext/filters/channel_idle/idle_filter_state.cc
+  src/core/ext/filters/channel_idle/legacy_channel_idle_filter.cc
+  src/core/ext/filters/fault_injection/fault_injection_filter.cc
+  src/core/ext/filters/fault_injection/fault_injection_service_config_parser.cc
+  src/core/ext/filters/gcp_authentication/gcp_authentication_filter.cc
+  src/core/ext/filters/gcp_authentication/gcp_authentication_service_config_parser.cc
+  src/core/ext/filters/http/client/http_client_filter.cc
+  src/core/ext/filters/http/client_authority_filter.cc
+  src/core/ext/filters/http/http_filters_plugin.cc
+  src/core/ext/filters/http/message_compress/compression_filter.cc
+  src/core/ext/filters/http/server/http_server_filter.cc
+  src/core/ext/filters/message_size/message_size_filter.cc
+  src/core/ext/filters/rbac/rbac_filter.cc
+  src/core/ext/filters/rbac/rbac_service_config_parser.cc
+  src/core/ext/filters/stateful_session/stateful_session_filter.cc
+  src/core/ext/filters/stateful_session/stateful_session_service_config_parser.cc
+  src/core/ext/transport/chttp2/alpn/alpn.cc
+  src/core/ext/transport/chttp2/client/chttp2_connector.cc
+  src/core/ext/transport/chttp2/server/chttp2_server.cc
+  src/core/ext/transport/chttp2/transport/bin_decoder.cc
+  src/core/ext/transport/chttp2/transport/bin_encoder.cc
+  src/core/ext/transport/chttp2/transport/call_tracer_wrapper.cc
+  src/core/ext/transport/chttp2/transport/chttp2_transport.cc
+  src/core/ext/transport/chttp2/transport/decode_huff.cc
+  src/core/ext/transport/chttp2/transport/flow_control.cc
+  src/core/ext/transport/chttp2/transport/frame.cc
+  src/core/ext/transport/chttp2/transport/frame_data.cc
+  src/core/ext/transport/chttp2/transport/frame_goaway.cc
+  src/core/ext/transport/chttp2/transport/frame_ping.cc
+  src/core/ext/transport/chttp2/transport/frame_rst_stream.cc
+  src/core/ext/transport/chttp2/transport/frame_settings.cc
+  src/core/ext/transport/chttp2/transport/frame_window_update.cc
+  src/core/ext/transport/chttp2/transport/hpack_encoder.cc
+  src/core/ext/transport/chttp2/transport/hpack_encoder_table.cc
+  src/core/ext/transport/chttp2/transport/hpack_parse_result.cc
+  src/core/ext/transport/chttp2/transport/hpack_parser.cc
+  src/core/ext/transport/chttp2/transport/hpack_parser_table.cc
+  src/core/ext/transport/chttp2/transport/http2_settings.cc
+  src/core/ext/transport/chttp2/transport/huffsyms.cc
+  src/core/ext/transport/chttp2/transport/parsing.cc
+  src/core/ext/transport/chttp2/transport/ping_abuse_policy.cc
+  src/core/ext/transport/chttp2/transport/ping_callbacks.cc
+  src/core/ext/transport/chttp2/transport/ping_rate_policy.cc
+  src/core/ext/transport/chttp2/transport/stream_lists.cc
+  src/core/ext/transport/chttp2/transport/varint.cc
+  src/core/ext/transport/chttp2/transport/write_size_policy.cc
+  src/core/ext/transport/chttp2/transport/writing.cc
+  src/core/ext/transport/inproc/inproc_transport.cc
+  src/core/ext/transport/inproc/legacy_inproc_transport.cc
   src/core/ext/upb-gen/envoy/admin/v3/certs.upb_minitable.c
   src/core/ext/upb-gen/envoy/admin/v3/clusters.upb_minitable.c
   src/core/ext/upb-gen/envoy/admin/v3/config_dump.upb_minitable.c
@@ -2584,164 +2656,6 @@ add_library(grpc_upb
   src/core/ext/upbdefs-gen/xds/type/v3/cel.upbdefs.c
   src/core/ext/upbdefs-gen/xds/type/v3/range.upbdefs.c
   src/core/ext/upbdefs-gen/xds/type/v3/typed_struct.upbdefs.c
-)
-
-target_compile_features(grpc_upb PUBLIC cxx_std_14)
-
-set_target_properties(grpc_upb PROPERTIES
-  VERSION ${gRPC_CORE_VERSION}
-  SOVERSION ${gRPC_CORE_SOVERSION}
-)
-
-if(WIN32 AND MSVC)
-  set_target_properties(grpc_upb PROPERTIES COMPILE_PDB_NAME "grpc_upb"
-    COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
-  )
-  if(BUILD_SHARED_LIBS)
-    set_target_properties(grpc_upb PROPERTIES DEFINE_SYMBOL "GRPC_UPB_DLL_EXPORTS")
-    target_compile_definitions(grpc_upb INTERFACE "GRPC_UPB_DLL_IMPORTS")
-  endif()
-  if(gRPC_INSTALL)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc_upb.pdb
-      DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
-    )
-  endif()
-endif()
-
-target_include_directories(grpc_upb
-  PUBLIC $<INSTALL_INTERFACE:${gRPC_INSTALL_INCLUDEDIR}> $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-  PRIVATE
-    ${CMAKE_CURRENT_SOURCE_DIR}
-    ${_gRPC_ADDRESS_SORTING_INCLUDE_DIR}
-    ${_gRPC_RE2_INCLUDE_DIR}
-    ${_gRPC_SSL_INCLUDE_DIR}
-    ${_gRPC_UPB_GENERATED_DIR}
-    ${_gRPC_UPB_GRPC_GENERATED_DIR}
-    ${_gRPC_UPB_INCLUDE_DIR}
-    ${_gRPC_XXHASH_INCLUDE_DIR}
-    ${_gRPC_ZLIB_INCLUDE_DIR}
-)
-target_link_libraries(grpc_upb
-  # core libs
-  PUBLIC  ${_gRPC_ALLTARGETS_LIBRARIES}
-  # vendored libs
-  PUBLIC  ${_gRPC_ADDRESS_SORTING_LIBRARIES}
-  PUBLIC  upb_json_lib
-  PUBLIC  upb_textformat_lib
-  # external dependencies used within grpc
-  PRIVATE ${_gRPC_CARES_LIBRARIES}
-  PRIVATE ${_gRPC_RE2_LIBRARIES}
-  PRIVATE ${_gRPC_ZLIB_LIBRARIES}
-  # external dependencies that need to available at runtime
-  PUBLIC  ${_gRPC_SSL_LIBRARIES}
-  PUBLIC  absl::algorithm_container
-  PUBLIC  absl::config
-  PUBLIC  absl::no_destructor
-  PUBLIC  absl::cleanup
-  PUBLIC  absl::flat_hash_map
-  PUBLIC  absl::flat_hash_set
-  PUBLIC  absl::inlined_vector
-  PUBLIC  absl::bind_front
-  PUBLIC  absl::function_ref
-  PUBLIC  absl::hash
-  PUBLIC  absl::type_traits
-  PUBLIC  absl::random_bit_gen_ref
-  PUBLIC  absl::random_distributions
-  PUBLIC  absl::statusor
-  PUBLIC  absl::span
-  PUBLIC  absl::utility
-  # targets which belong to grpc anyway
-  PUBLIC  gpr
-)
-if(_gRPC_PLATFORM_IOS OR _gRPC_PLATFORM_MAC)
-  target_link_libraries(grpc_upb PUBLIC "-framework CoreFoundation")
-endif()
-
-if(gRPC_INSTALL)
-  install(TARGETS grpc_upb EXPORT gRPCTargets
-    RUNTIME DESTINATION ${gRPC_INSTALL_BINDIR}
-    BUNDLE DESTINATION  ${gRPC_INSTALL_BINDIR}
-    LIBRARY DESTINATION ${gRPC_INSTALL_LIBDIR}
-    ARCHIVE DESTINATION ${gRPC_INSTALL_LIBDIR}
-  )
-endif()
-
-
-# the main library, minus `src/core/ext/upb{,defs}-gen` (see above)
-add_library(grpc
-  src/core/channelz/channel_trace.cc
-  src/core/channelz/channelz.cc
-  src/core/channelz/channelz_registry.cc
-  src/core/client_channel/backup_poller.cc
-  src/core/client_channel/client_channel.cc
-  src/core/client_channel/client_channel_factory.cc
-  src/core/client_channel/client_channel_filter.cc
-  src/core/client_channel/client_channel_plugin.cc
-  src/core/client_channel/client_channel_service_config.cc
-  src/core/client_channel/direct_channel.cc
-  src/core/client_channel/dynamic_filters.cc
-  src/core/client_channel/global_subchannel_pool.cc
-  src/core/client_channel/lb_metadata.cc
-  src/core/client_channel/load_balanced_call_destination.cc
-  src/core/client_channel/local_subchannel_pool.cc
-  src/core/client_channel/retry_filter.cc
-  src/core/client_channel/retry_filter_legacy_call_data.cc
-  src/core/client_channel/retry_service_config.cc
-  src/core/client_channel/retry_throttle.cc
-  src/core/client_channel/subchannel.cc
-  src/core/client_channel/subchannel_pool_interface.cc
-  src/core/client_channel/subchannel_stream_client.cc
-  src/core/ext/filters/backend_metrics/backend_metric_filter.cc
-  src/core/ext/filters/census/grpc_context.cc
-  src/core/ext/filters/channel_idle/idle_filter_state.cc
-  src/core/ext/filters/channel_idle/legacy_channel_idle_filter.cc
-  src/core/ext/filters/fault_injection/fault_injection_filter.cc
-  src/core/ext/filters/fault_injection/fault_injection_service_config_parser.cc
-  src/core/ext/filters/gcp_authentication/gcp_authentication_filter.cc
-  src/core/ext/filters/gcp_authentication/gcp_authentication_service_config_parser.cc
-  src/core/ext/filters/http/client/http_client_filter.cc
-  src/core/ext/filters/http/client_authority_filter.cc
-  src/core/ext/filters/http/http_filters_plugin.cc
-  src/core/ext/filters/http/message_compress/compression_filter.cc
-  src/core/ext/filters/http/server/http_server_filter.cc
-  src/core/ext/filters/message_size/message_size_filter.cc
-  src/core/ext/filters/rbac/rbac_filter.cc
-  src/core/ext/filters/rbac/rbac_service_config_parser.cc
-  src/core/ext/filters/stateful_session/stateful_session_filter.cc
-  src/core/ext/filters/stateful_session/stateful_session_service_config_parser.cc
-  src/core/ext/transport/chttp2/alpn/alpn.cc
-  src/core/ext/transport/chttp2/client/chttp2_connector.cc
-  src/core/ext/transport/chttp2/server/chttp2_server.cc
-  src/core/ext/transport/chttp2/transport/bin_decoder.cc
-  src/core/ext/transport/chttp2/transport/bin_encoder.cc
-  src/core/ext/transport/chttp2/transport/call_tracer_wrapper.cc
-  src/core/ext/transport/chttp2/transport/chttp2_transport.cc
-  src/core/ext/transport/chttp2/transport/decode_huff.cc
-  src/core/ext/transport/chttp2/transport/flow_control.cc
-  src/core/ext/transport/chttp2/transport/frame.cc
-  src/core/ext/transport/chttp2/transport/frame_data.cc
-  src/core/ext/transport/chttp2/transport/frame_goaway.cc
-  src/core/ext/transport/chttp2/transport/frame_ping.cc
-  src/core/ext/transport/chttp2/transport/frame_rst_stream.cc
-  src/core/ext/transport/chttp2/transport/frame_settings.cc
-  src/core/ext/transport/chttp2/transport/frame_window_update.cc
-  src/core/ext/transport/chttp2/transport/hpack_encoder.cc
-  src/core/ext/transport/chttp2/transport/hpack_encoder_table.cc
-  src/core/ext/transport/chttp2/transport/hpack_parse_result.cc
-  src/core/ext/transport/chttp2/transport/hpack_parser.cc
-  src/core/ext/transport/chttp2/transport/hpack_parser_table.cc
-  src/core/ext/transport/chttp2/transport/http2_settings.cc
-  src/core/ext/transport/chttp2/transport/huffsyms.cc
-  src/core/ext/transport/chttp2/transport/parsing.cc
-  src/core/ext/transport/chttp2/transport/ping_abuse_policy.cc
-  src/core/ext/transport/chttp2/transport/ping_callbacks.cc
-  src/core/ext/transport/chttp2/transport/ping_rate_policy.cc
-  src/core/ext/transport/chttp2/transport/stream_lists.cc
-  src/core/ext/transport/chttp2/transport/varint.cc
-  src/core/ext/transport/chttp2/transport/write_size_policy.cc
-  src/core/ext/transport/chttp2/transport/writing.cc
-  src/core/ext/transport/inproc/inproc_transport.cc
-  src/core/ext/transport/inproc/legacy_inproc_transport.cc
   src/core/filter/blackboard.cc
   src/core/handshaker/endpoint_info/endpoint_info_handshaker.cc
   src/core/handshaker/handshaker.cc
@@ -3179,8 +3093,11 @@ if(WIN32 AND MSVC)
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
   )
   if(BUILD_SHARED_LIBS)
-    target_compile_definitions(grpc PRIVATE   "GRPC_DLL_EXPORTS" "GRPC_UPB_DLL_IMPORTS")
-    target_compile_definitions(grpc INTERFACE "GRPC_DLL_IMPORTS" "GRPC_UPB_DLL_IMPORTS")
+    target_compile_definitions(grpc
+    PRIVATE
+      "GRPC_DLL_EXPORTS"
+      "GPR_DLL_IMPORTS"
+    )
   endif()
   if(gRPC_INSTALL)
     install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc.pdb
@@ -3203,41 +3120,34 @@ target_include_directories(grpc
     ${_gRPC_ZLIB_INCLUDE_DIR}
 )
 target_link_libraries(grpc
-  # broken out of grpc
-  PUBLIC  grpc_upb
-  # core libs
-  PUBLIC  ${_gRPC_ALLTARGETS_LIBRARIES}
-  # vendored libs
-  PUBLIC  ${_gRPC_ADDRESS_SORTING_LIBRARIES}
-  PUBLIC  upb_json_lib
-  PUBLIC  upb_textformat_lib
-  # external dependencies used within grpc
-  PRIVATE ${_gRPC_CARES_LIBRARIES}
-  PRIVATE ${_gRPC_RE2_LIBRARIES}
-  PRIVATE ${_gRPC_ZLIB_LIBRARIES}
-  # external dependencies that need to available at runtime
-  PUBLIC  ${_gRPC_SSL_LIBRARIES}
-  PUBLIC  absl::algorithm_container
-  PUBLIC  absl::config
-  PUBLIC  absl::no_destructor
-  PUBLIC  absl::cleanup
-  PUBLIC  absl::flat_hash_map
-  PUBLIC  absl::flat_hash_set
-  PUBLIC  absl::inlined_vector
-  PUBLIC  absl::bind_front
-  PUBLIC  absl::function_ref
-  PUBLIC  absl::hash
-  PUBLIC  absl::type_traits
-  PUBLIC  absl::random_bit_gen_ref
-  PUBLIC  absl::random_distributions
-  PUBLIC  absl::statusor
-  PUBLIC  absl::span
-  PUBLIC  absl::utility
-  # targets which belong to grpc anyway
-  PUBLIC  gpr
+  ${_gRPC_ALLTARGETS_LIBRARIES}
+  upb_json_lib
+  upb_textformat_lib
+  ${_gRPC_RE2_LIBRARIES}
+  ${_gRPC_ZLIB_LIBRARIES}
+  absl::algorithm_container
+  absl::config
+  absl::no_destructor
+  absl::cleanup
+  absl::flat_hash_map
+  absl::flat_hash_set
+  absl::inlined_vector
+  absl::bind_front
+  absl::function_ref
+  absl::hash
+  absl::type_traits
+  absl::random_bit_gen_ref
+  absl::random_distributions
+  absl::statusor
+  absl::span
+  absl::utility
+  ${_gRPC_CARES_LIBRARIES}
+  gpr
+  ${_gRPC_SSL_LIBRARIES}
+  ${_gRPC_ADDRESS_SORTING_LIBRARIES}
 )
 if(_gRPC_PLATFORM_IOS OR _gRPC_PLATFORM_MAC)
-  target_link_libraries(grpc PUBLIC "-framework CoreFoundation")
+  target_link_libraries(grpc "-framework CoreFoundation")
 endif()
 
 foreach(_hdr
@@ -3879,8 +3789,11 @@ if(WIN32 AND MSVC)
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
   )
   if(BUILD_SHARED_LIBS)
-    set_target_properties(grpc_unsecure PROPERTIES DEFINE_SYMBOL "GRPC_DLL_EXPORTS")
-    target_compile_definitions(grpc_unsecure INTERFACE "GRPC_DLL_IMPORTS")
+    target_compile_definitions(grpc_unsecure
+    PRIVATE
+      "GRPC_DLL_EXPORTS"
+      "GPR_DLL_IMPORTS"
+    )
   endif()
   if(gRPC_INSTALL)
     install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc_unsecure.pdb
@@ -3903,37 +3816,32 @@ target_include_directories(grpc_unsecure
     ${_gRPC_ZLIB_INCLUDE_DIR}
 )
 target_link_libraries(grpc_unsecure
-  # core libs
-  PUBLIC  ${_gRPC_ALLTARGETS_LIBRARIES}
-  # vendored libs
-  PUBLIC  ${_gRPC_ADDRESS_SORTING_LIBRARIES}
-  PUBLIC  upb_mini_descriptor_lib
-  PUBLIC  upb_wire_lib
-  # external dependencies used within grpc
-  PRIVATE ${_gRPC_ZLIB_LIBRARIES}
-  PRIVATE ${_gRPC_CARES_LIBRARIES}
-  # external dependencies that need to available at runtime
-  PUBLIC  absl::algorithm_container
-  PUBLIC  absl::config
-  PUBLIC  absl::no_destructor
-  PUBLIC  absl::cleanup
-  PUBLIC  absl::flat_hash_map
-  PUBLIC  absl::flat_hash_set
-  PUBLIC  absl::inlined_vector
-  PUBLIC  absl::bind_front
-  PUBLIC  absl::function_ref
-  PUBLIC  absl::hash
-  PUBLIC  absl::type_traits
-  PUBLIC  absl::random_bit_gen_ref
-  PUBLIC  absl::random_distributions
-  PUBLIC  absl::statusor
-  PUBLIC  absl::span
-  PUBLIC  absl::utility
-  # targets which belong to grpc anyway
-  PUBLIC  gpr
+  ${_gRPC_ALLTARGETS_LIBRARIES}
+  upb_mini_descriptor_lib
+  upb_wire_lib
+  ${_gRPC_ZLIB_LIBRARIES}
+  absl::algorithm_container
+  absl::config
+  absl::no_destructor
+  absl::cleanup
+  absl::flat_hash_map
+  absl::flat_hash_set
+  absl::inlined_vector
+  absl::bind_front
+  absl::function_ref
+  absl::hash
+  absl::type_traits
+  absl::random_bit_gen_ref
+  absl::random_distributions
+  absl::statusor
+  absl::span
+  absl::utility
+  ${_gRPC_CARES_LIBRARIES}
+  gpr
+  ${_gRPC_ADDRESS_SORTING_LIBRARIES}
 )
 if(_gRPC_PLATFORM_IOS OR _gRPC_PLATFORM_MAC)
-  target_link_libraries(grpc_unsecure PUBLIC "-framework CoreFoundation")
+  target_link_libraries(grpc_unsecure "-framework CoreFoundation")
 endif()
 
 foreach(_hdr
@@ -4200,9 +4108,6 @@ if(WIN32 AND MSVC)
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
   endif()
-elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-  # see https://github.com/grpc/grpc/issues/36654
-  target_link_options(upb_json_lib PRIVATE -Wl,-undefined,dynamic_lookup)
 endif()
 
 target_include_directories(upb_json_lib
@@ -4256,12 +4161,6 @@ if(WIN32 AND MSVC)
     install(FILES ${CMAKE_CURRENT_BINARY_DIR}/upb_mem_lib.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
-  endif()
-  # More details in third_party/upb/upb/port_def.inc;
-  # needs to be separate from gRPC_DLL_{IM,EX}PORTS
-  set_target_properties(upb_mem_lib PROPERTIES DEFINE_SYMBOL "UPB_MEM_DLL_EXPORTS")
-  if(BUILD_SHARED_LIBS)
-    target_compile_definitions(upb_mem_lib INTERFACE UPB_MEM_DLL_IMPORTS)
   endif()
 endif()
 
@@ -4327,12 +4226,6 @@ if(WIN32 AND MSVC)
     install(FILES ${CMAKE_CURRENT_BINARY_DIR}/upb_message_lib.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
-  endif()
-  # More details in third_party/upb/upb/port_def.inc;
-  # needs to be separate from gRPC_DLL_{IM,EX}PORTS
-  set_target_properties(upb_message_lib PROPERTIES DEFINE_SYMBOL "UPB_MSG_DLL_EXPORTS")
-  if(BUILD_SHARED_LIBS)
-    target_compile_definitions(upb_message_lib INTERFACE UPB_MSG_DLL_IMPORTS)
   endif()
 endif()
 
@@ -4472,9 +4365,6 @@ if(WIN32 AND MSVC)
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
   endif()
-elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-  # see https://github.com/grpc/grpc/issues/36654
-  target_link_options(upb_textformat_lib PRIVATE -Wl,-undefined,dynamic_lookup)
 endif()
 
 target_include_directories(upb_textformat_lib
@@ -4764,8 +4654,12 @@ if(WIN32 AND MSVC)
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
   )
   if(BUILD_SHARED_LIBS)
-    set_target_properties(grpc++ PROPERTIES DEFINE_SYMBOL "GRPCXX_DLL_EXPORTS")
-    target_compile_definitions(grpc++ INTERFACE "GRPCXX_DLL_IMPORTS")
+    target_compile_definitions(grpc++
+    PRIVATE
+      "GRPCXX_DLL_EXPORTS"
+      "GPR_DLL_IMPORTS"
+      "GRPC_DLL_IMPORTS"
+    )
   endif()
   if(gRPC_INSTALL)
     install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc++.pdb
@@ -5506,8 +5400,12 @@ if(WIN32 AND MSVC)
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
   )
   if(BUILD_SHARED_LIBS)
-    set_target_properties(grpc++_unsecure PROPERTIES DEFINE_SYMBOL "GRPCXX_DLL_EXPORTS")
-    target_compile_definitions(grpc++_unsecure INTERFACE "GRPCXX_DLL_IMPORTS")
+    target_compile_definitions(grpc++_unsecure
+    PRIVATE
+      "GRPCXX_DLL_EXPORTS"
+      "GPR_DLL_IMPORTS"
+      "GRPC_DLL_IMPORTS"
+    )
   endif()
   if(gRPC_INSTALL)
     install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc++_unsecure.pdb
