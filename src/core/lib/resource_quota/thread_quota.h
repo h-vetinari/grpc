@@ -45,7 +45,7 @@ class ThreadQuota : public RefCounted<ThreadQuota> {
   bool Reserve(size_t num_threads);
 
   // Release some number of threads.
-  void Release(size_t num_threads);
+  GRPC_DLL void Release(size_t num_threads);
 
  private:
   Mutex mu_;

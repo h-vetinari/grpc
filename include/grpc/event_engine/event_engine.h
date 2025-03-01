@@ -139,7 +139,7 @@ class EventEngine : public std::enable_shared_from_this<EventEngine>,
   /// Returned by \a Connect, and can be passed to \a CancelConnect.
   struct ConnectionHandle {
     intptr_t keys[2];
-    static const GRPC_DLL ConnectionHandle kInvalid;
+    static const ConnectionHandle kInvalid;
   };
   /// Thin wrapper around a platform-specific sockaddr type. A sockaddr struct
   /// exists on all platforms that gRPC supports.

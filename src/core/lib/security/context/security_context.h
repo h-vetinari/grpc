@@ -52,7 +52,7 @@ struct grpc_auth_property_array {
   size_t capacity = 0;
 };
 
-void grpc_auth_property_reset(grpc_auth_property* property);
+GRPC_DLL void grpc_auth_property_reset(grpc_auth_property* property);
 
 #define GRPC_AUTH_CONTEXT_ARG "grpc.auth_context"
 

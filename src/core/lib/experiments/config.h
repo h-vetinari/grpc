@@ -64,7 +64,7 @@ class ExperimentFlags {
   static void TestOnlyClear();
 
  private:
-  static bool LoadFlagsAndCheck(size_t experiment_id);
+  GRPC_DLL static bool LoadFlagsAndCheck(size_t experiment_id);
 
   // We layout experiment flags in groups of 63... each 64 bit word contains
   // 63 enablement flags (one per experiment), and the high bit which indicates
@@ -76,7 +76,7 @@ class ExperimentFlags {
   static constexpr size_t kNumExperimentFlagsWords = 8;
   static constexpr size_t kFlagsPerWord = 63;
   static constexpr uint64_t kLoadedFlag = 0x8000000000000000ull;
-  static std::atomic<uint64_t> experiment_flags_[kNumExperimentFlagsWords];
+  GRPC_DLL static std::atomic<uint64_t> experiment_flags_[kNumExperimentFlagsWords];
 };
 
 // Return true if experiment \a experiment_id is enabled.

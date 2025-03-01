@@ -106,7 +106,7 @@ class StaticDataCertificateProvider final
 
   UniqueTypeName type() const override;
 
-  absl::Status ValidateCredentials() const;
+  GRPC_DLL absl::Status ValidateCredentials() const;
 
  private:
   struct WatcherInfo {

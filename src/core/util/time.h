@@ -104,7 +104,7 @@ class Timestamp {
   constexpr Timestamp() = default;
   // Constructs a Timestamp from a gpr_timespec.
   static Timestamp FromTimespecRoundDown(gpr_timespec t);
-  static Timestamp FromTimespecRoundUp(gpr_timespec t);
+  GRPC_DLL static Timestamp FromTimespecRoundUp(gpr_timespec t);
 
   // Construct a Timestamp from a gpr_cycle_counter.
   static Timestamp FromCycleCounterRoundUp(gpr_cycle_counter c);
@@ -272,7 +272,7 @@ class Duration {
   double seconds() const { return static_cast<double>(millis_) / 1000.0; }
 
   // NOLINTNEXTLINE: google-explicit-constructor
-  operator grpc_event_engine::experimental::EventEngine::Duration() const;
+  GRPC_DLL operator grpc_event_engine::experimental::EventEngine::Duration() const;
 
   gpr_timespec as_timespec() const;
 

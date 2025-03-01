@@ -393,8 +393,8 @@ class ChannelArgs {
   using CPtr =
       std::unique_ptr<const grpc_channel_args, ChannelArgs::ChannelArgsDeleter>;
 
-  ChannelArgs();
-  ~ChannelArgs();
+  GRPC_DLL ChannelArgs();
+  GRPC_DLL ~ChannelArgs();
   ChannelArgs(const ChannelArgs&);
   ChannelArgs& operator=(const ChannelArgs&);
   ChannelArgs(ChannelArgs&&) noexcept;

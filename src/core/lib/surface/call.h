@@ -302,9 +302,9 @@ grpc_compression_algorithm grpc_call_compression_for_level(
 // Did this client call receive a trailers-only response
 // TODO(markdroth): This is currently available only to the C++ API.
 //                  Move to surface API if requested by other languages.
-bool grpc_call_is_trailers_only(const grpc_call* call);
+GRPC_DLL bool grpc_call_is_trailers_only(const grpc_call* call);
 
 // Returns the authority for the call, as seen on the server side.
-absl::string_view grpc_call_server_authority(const grpc_call* call);
+GRPC_DLL absl::string_view grpc_call_server_authority(const grpc_call* call);
 
 #endif  // GRPC_SRC_CORE_LIB_SURFACE_CALL_H

@@ -75,7 +75,7 @@ struct Unwakeable final : public Wakeable {
   void Wakeup(WakeupMask) override {}
   void WakeupAsync(WakeupMask) override {}
   void Drop(WakeupMask) override {}
-  std::string ActivityDebugTag(WakeupMask) const override;
+  GRPC_DLL std::string ActivityDebugTag(WakeupMask) const override;
 };
 static Unwakeable* unwakeable() {
   return NoDestructSingleton<Unwakeable>::Get();

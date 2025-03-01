@@ -946,7 +946,7 @@ absl::StatusOr<Json> JsonReader::Parse(absl::string_view input) {
 
 }  // namespace
 
-absl::StatusOr<Json> JsonParse(absl::string_view json_str) {
+GRPC_DLL absl::StatusOr<Json> JsonParse(absl::string_view json_str) {
   return JsonReader::Parse(json_str);
 }
 

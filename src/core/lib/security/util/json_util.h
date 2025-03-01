@@ -31,7 +31,7 @@
 #define GRPC_AUTH_JSON_TYPE_EXTERNAL_ACCOUNT "external_account"
 
 // Gets a child property from a json node.
-const char* grpc_json_get_string_property(const grpc_core::Json& json,
+GRPC_DLL const char* grpc_json_get_string_property(const grpc_core::Json& json,
                                           const char* prop_name,
                                           grpc_error_handle* error);
 

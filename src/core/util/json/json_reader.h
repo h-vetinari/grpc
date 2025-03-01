@@ -26,7 +26,7 @@
 namespace grpc_core {
 
 // Parses JSON string from json_str.
-absl::StatusOr<Json> JsonParse(absl::string_view json_str);
+GRPC_DLL absl::StatusOr<Json> JsonParse(absl::string_view json_str);
 
 }  // namespace grpc_core
 

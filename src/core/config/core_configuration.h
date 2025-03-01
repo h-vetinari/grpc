@@ -35,7 +35,7 @@ namespace grpc_core {
 
 // Global singleton that stores library configuration - factories, etc...
 // that plugins might choose to extend.
-class GRPC_DLL CoreConfiguration {
+class CoreConfiguration {
  public:
   CoreConfiguration(const CoreConfiguration&) = delete;
   CoreConfiguration& operator=(const CoreConfiguration&) = delete;
