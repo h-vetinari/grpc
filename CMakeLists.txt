@@ -716,9 +716,6 @@ protobuf_generate_grpc_cpp_with_import_path_correction(
 protobuf_generate_grpc_cpp_with_import_path_correction(
   src/proto/grpc/reflection/v1alpha/reflection.proto src/proto/grpc/reflection/v1alpha/reflection.proto
 )
-
-if(gRPC_BUILD_TESTS)
-
 protobuf_generate_grpc_cpp_with_import_path_correction(
   src/proto/grpc/testing/benchmark_service.proto src/proto/grpc/testing/benchmark_service.proto
 )
@@ -1259,6 +1256,7 @@ protobuf_generate_grpc_cpp_with_import_path_correction(
 )
 endif()
 
+if(gRPC_BUILD_TESTS)
   add_custom_target(buildtests_c)
   if(_gRPC_PLATFORM_LINUX OR _gRPC_PLATFORM_MAC OR _gRPC_PLATFORM_POSIX)
     add_dependencies(buildtests_c fd_conservation_posix_test)
@@ -26626,8 +26624,8 @@ if(_gRPC_PLATFORM_LINUX OR _gRPC_PLATFORM_MAC OR _gRPC_PLATFORM_POSIX)
   target_link_libraries(server_request_call_test
     ${_gRPC_ALLTARGETS_LIBRARIES}
     gtest
-    grpc++_unsecure
-    grpc_test_util_unsecure
+    grpc++
+    grpc_test_util
   )
 
 
