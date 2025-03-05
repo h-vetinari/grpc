@@ -2396,6 +2396,30 @@ add_library(grpc
   src/core/xds/xds_client/xds_client.cc
 )
 
+if(WIN32 AND MSVC)
+  # need to turn this off to avoid pulling in enormous amount of transitive symbols
+  set_target_properties(grpc PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS OFF)
+
+  # Add pre-link step to process object files
+  add_custom_command(
+    TARGET grpc
+    PRE_LINK
+    COMMAND ${CMAKE_COMMAND} -E make_directory "${CMAKE_CURRENT_BINARY_DIR}/symbols"
+    COMMAND echo "for %%f in (<TARGET_OBJECTS:grpc>) do dumpbin /symbols %%f > ${CMAKE_CURRENT_BINARY_DIR}/symbols/symbols_%%~nf.txt"
+    COMMAND for %%f in ($<TARGET_OBJECTS:grpc>) do dumpbin /symbols %%f > ${CMAKE_CURRENT_BINARY_DIR}/symbols/symbols_%%~nf.txt
+    COMMAND echo "$ENV{BUILD_PREFIX}/python generate_def.py symbols grpc.def"
+    COMMAND $ENV{BUILD_PREFIX}/python ${CMAKE_SOURCE_DIR}/generate_def.py ${CMAKE_CURRENT_BINARY_DIR}/symbols ${CMAKE_CURRENT_BINARY_DIR}/grpc.def
+    BYPRODUCTS ${CMAKE_CURRENT_BINARY_DIR}/grpc.def
+    COMMENT "Generating grpc.def from object files"
+    VERBATIM
+    USES_TERMINAL
+  )
+  # export only filtered list of symbols
+  set_target_properties(grpc PROPERTIES
+    LINK_FLAGS "/DEF:${CMAKE_CURRENT_BINARY_DIR}/grpc.def"
+  )
+endif()
+
 target_compile_features(grpc PUBLIC cxx_std_17)
 
 set_target_properties(grpc PROPERTIES
