@@ -305,7 +305,10 @@ if BUILD_WITH_STATIC_LIBSTDCXX:
 
 CYTHON_EXTENSION_PACKAGE_NAMES = ()
 
-CYTHON_EXTENSION_MODULE_NAMES = ("grpc._cython.cygrpc", "grpc._cython.cygrpc_absl_init")
+CYTHON_EXTENSION_MODULE_NAMES = (
+    "grpc._cython.cygrpc",
+    "grpc._cython.cygrpc_absl_init",
+)
 
 GRPCIO_CC_SRCS = ()
 
